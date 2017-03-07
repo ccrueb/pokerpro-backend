@@ -9,4 +9,4 @@ The Node.js application which powers Poker Pro
 
 # Random thoughts
 - API calls should be done over HTTPS to prevent man in the middle attacks. This might cost $$ to get the SSL certificate. 
--  
+- This is an entire poker engine written in Node. If we get stuck on any part this is great [reference](https://github.com/brunoscopelliti/poker-holdem-engine) 
