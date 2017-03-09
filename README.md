@@ -1,6 +1,14 @@
 # pokerpro-backend
 The Node.js application which powers Poker Pro
 
+# server info
+The server is hosted on Digital Ocean. Cal has the login info to access the digital ocean dashboard.
+The server was configured using the following [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04). 
+To ssh into the server...
+
+```ssh dev@104.131.99.193```
+when it prompts for password: ```poker506```
+
 # Resources about building a secure API
 [Stack Overflow about handing OAuth on the frontend](http://stackoverflow.com/questions/33860262/how-to-interact-with-back-end-after-successfull-auth-with-oauth-on-front-end)
 
