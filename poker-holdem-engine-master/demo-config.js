@@ -1,6 +1,6 @@
 
 exports = module.exports = {
-  mongoUri: 'mongodb://localhost:27017/store',
+  mongoUri: 'mongodb://104.131.99.193:18128/store',
   tournamentId: '574e653bbebd5a20064d08fb',
   players: [{
     id: 'arale-id',
