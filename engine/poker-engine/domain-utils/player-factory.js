@@ -51,7 +51,7 @@ const actions = {
 
     gs.pot += betAmount;
 
-    if (this[isAllin_] || gs.sidepots.length > 0 || gs.players.find(x => x[isAllin_]) != null){
+    if (this[isAllin_] || gs.sidepots.length > 0 || gs.players.find(x => x[isAllin_]) != null) {
       splitPot(gs);
     }
 
@@ -76,6 +76,7 @@ const actions = {
    * @returns {Promise} a promise resolved when bet data is stored
    */
   payBet(gs, betAmount) {
+    
 
     // normalize betAmount to the maximum value the player can pay
     betAmount = Math.min(this.chips, betAmount);
@@ -84,7 +85,7 @@ const actions = {
     const playerCallAmount = Math.max(gs.callAmount - this.chipsBet, 0);
 
 
-    if (betAmount < playerCallAmount && betAmount < this.chips){
+    if (betAmount < playerCallAmount && betAmount < this.chips) {
       // when a player bets less than the minimum required amount,
       // and he is not betting all his chips, he's folding.
       return this.fold(gs);
@@ -102,17 +103,17 @@ const actions = {
       //    specifically a player who have called for a specific amount,
       //    cant raise, unless the pot was reopened by someone else.
 
-      if (this[hasTalked_]){
+      if (this[hasTalked_]) {
         betAmount = playerCallAmount;
       }
-      else{
+      else {
 
         // 2) check minumum raise amount,
         //    and eventually update the data about the last raise.
 
         const minRaise = playerCallAmount + (gs.lastRaiseAmount || 2 * gs.sb);
 
-        if(betAmount < minRaise){
+        if (betAmount < minRaise) {
 
           // when the raise does not meet the minimum raise amount,
           // it's allowed only when the player is betting all his chips;
@@ -120,17 +121,17 @@ const actions = {
           // for the players who have already bet in this hand,
           // that is, last raise data are not updated.
 
-          if (betAmount < this.chips){
+          if (betAmount < this.chips) {
             betAmount = playerCallAmount;
           }
         }
-        else{
+        else {
 
           // when the raise amount is valid update
           // lastRaiseAmount gamestate property is updated.
 
           gs.lastRaiseAmount = betAmount - playerCallAmount;
-          gs.players.forEach(player => delete(player[hasTalked_]));
+          gs.players.forEach(player => delete (player[hasTalked_]));
         }
       }
     }
@@ -197,7 +198,7 @@ const actions = {
    *
    * @returns {Promise} a promise resolved when the bot service response arrives
    */
-  talk(gs){
+  talk(gs, id) {
 
     const state = Object.create(null);
 
@@ -243,11 +244,11 @@ const actions = {
 
     // the list of the players...
     // make sure that the current players can see only his cards
-    state.players = gs.players.map(function(player) {
+    state.players = gs.players.map(function (player) {
       const cleanPlayer = {
         id: player.id, name: player.name, status: player.status, chips: player.chips, chipsBet: player.chipsBet
       };
-      if (this.id !== player.id){
+      if (this.id !== player.id) {
         return cleanPlayer;
       }
       cleanPlayer.cards = player.cards;
@@ -257,20 +258,119 @@ const actions = {
     // index of the player 'this' in the players array
     state.me = gs.players.findIndex(player => player.id == this.id);
 
-
-    const requestSettings = { body: state, json: true, followAllRedirects: true, maxRedirects: 1, timeout: 5000 };
+    //TODO: Updated move timeout to 30 seconds. This should be moved to a global config variable -CAL
+    const requestSettings = { body: state, json: true, followAllRedirects: true, maxRedirects: 1, timeout: 30 * 1000 };
 
     return new Promise((resolve, reject) => {
-      request.post(`${this.serviceUrl}bet`, requestSettings, (err, response, playerBetAmount) => {
-        if (err){
-          logger.warn('Bet request to %s failed, cause %s', this.serviceUrl, err.message, { tag: gs.handUniqueId });
-          return void resolve(0);
+
+      var interval = setInterval(function () {
+        if (gs.requests.get(id) && gs.requests.get(id).params && gs.requests.get(id).params.bet) {
+          //Clear timer and interval
+          clearInterval(interval);
+          clearTimeout(timer);
+
+          resolve(sanitizeAmount(gs.requests.get(this.id).params.bet));
         }
-        logger.log('silly', '%s (%s) has bet %s (raw)', this.name, this.id, playerBetAmount, { tag: gs.handUniqueId });
-        resolve(sanitizeAmount(playerBetAmount));
-      });
+      }, 100);
+
+      //If no move recieved in 15 seconds send 0
+      var timer = setTimeout(function () {
+        logger.log('debug', '%d ran out of time', id);
+        //Clear timer and interval
+        clearInterval(interval);
+        clearTimeout(timer);
+
+        resolve(0);
+
+      }, 5 * 1000);
+
+
+
+      // request.post(`${this.serviceUrl}bet`, requestSettings, (err, response, playerBetAmount) => {
+      //   if (err){
+      //     logger.warn('Bet request to %s failed, cause %s', this.serviceUrl, err.message, { tag: gs.handUniqueId });
+      //     return void resolve(0);
+      //   }
+      //   logger.log('silly', '%s (%s) has bet %s (raw)', this.name, this.id, playerBetAmount, { tag: gs.handUniqueId });
+      //   resolve(sanitizeAmount(playerBetAmount));
+      // });
     });
 
+  },
+
+  /**
+   * @function
+   * @name getGs
+   * @desc
+   *  Prepare the gamestate model with the only information
+   *  each player should know, then returns object
+   *
+   * @param {Object} gs:
+   *  the gamestate object
+   *
+   * @returns {Object} modified gamestate object
+   */
+  getGs(gs) {
+
+    const state = Object.create(null);
+
+    // unique id of the current tournament
+    state.tournamentId = gs.tournamentId;
+
+    // initial amount of chips available to each player
+    state.buyin = config.BUYIN;
+
+    // game number of the current tournament
+    state.game = gs.gameProgressiveId;
+
+    // hand number of the current game
+    state.hand = gs.handProgressiveId;
+
+    // count the number of time
+    // that players had already have the possibility to bet in the current session
+    state.spinCount = gs.spinCount;
+
+    // value of the small blinds
+    // ... big blind is always twice
+    state.sb = gs.sb;
+
+    // value of the pot, and eventually sidepot.
+    // are updated after each bet
+    state.pot = gs.pot;
+    state.sidepots = gs.sidepots;
+
+    // list of the community cards on the table
+    // ... everyone is able to access this same list
+    state.commonCards = gs.commonCards;
+
+    // index of the player with the dealer button
+    state.db = gs.dealerButtonIndex;
+
+    // amount of chips the current player must bet in order to remain in the game;
+    // it depends by how much he bet previously
+    state.callAmount = Math.max(gs.callAmount - this.chipsBet, 0);
+
+    // minimum amount the player has to bet
+    // in case he want to raise the call amount for the other players
+    state.minimumRaiseAmount = state.callAmount + (gs.lastRaiseAmount || 2 * gs.sb);
+
+    // the list of the players...
+    // make sure that the current players can see only his cards
+    state.players = gs.players.map(function (player) {
+      const cleanPlayer = {
+        id: player.id, name: player.name, status: player.status, chips: player.chips, chipsBet: player.chipsBet
+      };
+      if (this.id !== player.id) {
+        return cleanPlayer;
+      }
+      cleanPlayer.cards = player.cards;
+      return cleanPlayer;
+    }, this);
+
+    // index of the player 'this' in the players array
+    state.me = gs.players.findIndex(player => player.id == this.id);
+
+    return state;
   },
 
 
@@ -285,7 +385,7 @@ const actions = {
    *
    * @returns {Array} The strongest cards combination
    */
-  showdown(commonCards){
+  showdown(commonCards) {
     const allCombinations = getCombinations(this.cards.concat(commonCards), 5);
     const strongestCombination = sortByRank(allCombinations)[0];
 
@@ -308,8 +408,8 @@ const actions = {
  *
  * @returns {Boolean} true when the input parameter is a valid "player" object; false otherwise
  */
-function isValidPlayer(player){
-  return player.id && player.name && player.serviceUrl;
+function isValidPlayer(player) {
+  return player.id && player.name;
 }
 
 /**
@@ -322,8 +422,8 @@ function isValidPlayer(player){
  *
  * @returns {Number} amount (valid)
  */
-function sanitizeAmount(amount){
-  if (typeof amount != 'number'){
+function sanitizeAmount(amount) {
+  if (typeof amount != 'number') {
     amount = Number.parseInt(amount, 10);
   }
   return amount > 0 ? amount : 0;
@@ -341,12 +441,12 @@ function sanitizeAmount(amount){
  *
  * @returns {String}
  */
-function getBestCombinationCardsLogMessage(cards){
+function getBestCombinationCardsLogMessage(cards) {
   return cards
-    .reduce(function(all, card){
+    .reduce(function (all, card) {
       all += `${card.rank}${card.type}, `;
       return all;
-    }, '').trim().slice(0,-1);
+    }, '').trim().slice(0, -1);
 }
 
 
@@ -364,16 +464,16 @@ function getBestCombinationCardsLogMessage(cards){
  *
  * @returns {object|null} the player object created
  */
-exports = module.exports = function factory(obj){
+exports = module.exports = function factory(obj) {
 
-  if (!isValidPlayer(obj)){
+  if (!isValidPlayer(obj)) {
     logger.warn('Registered an attempt to sign an invalid player', obj);
     return null;
   }
 
   const player = Object.create(actions);
 
-  ['id', 'name', 'serviceUrl']
+  ['id', 'name']
     .forEach(prop => Object.defineProperty(player, prop, { value: obj[prop] }))
 
   // status of the player

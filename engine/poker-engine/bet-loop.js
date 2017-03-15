@@ -13,6 +13,8 @@ const playerStatus = require('./domain/player-status');
 const shouldBet = require('./domain-utils/should-bet');
 const shouldBreak = require('./domain-utils/should-break');
 
+var requestQueue = require('./domain-utils/request-queue');
+
 
 const asyncFrom = require('./lib/loop-from-async');
 
@@ -30,10 +32,10 @@ const asyncFrom = require('./lib/loop-from-async');
  *
  * @returns {void}
  */
-exports = module.exports = function* betLoop(gs){
+exports = module.exports = function* betLoop(gs) {
 
   logger.info('Hand %d/%d, starting betting session', gs.gameProgressiveId, gs.handProgressiveId, { tag: gs.handUniqueId });
-
+  requestQueue.sendResponses(gs);
 
   const deck_ = Symbol.for('cards-deck');
   const hasBB_ = Symbol.for('has-big-blind');
@@ -45,7 +47,7 @@ exports = module.exports = function* betLoop(gs){
   // the betting loop continues until
   // all the community cards are shown
   // and there are more than an active player
-  while (gs.commonCards.length <= 5 && gs.activePlayers.length > 1){
+  while (gs.commonCards.length <= 5 && gs.activePlayers.length > 1) {
 
 
 
@@ -69,11 +71,16 @@ exports = module.exports = function* betLoop(gs){
     do {
 
       yield* asyncFrom(gs.players, startIndex, shouldBreak.bind(null, gs),
-        player => shouldBet(gs, player, player => player.talk(gs).then(player.payBet.bind(player, gs))));
+        player => shouldBet(gs, player, player => player.talk(gs, player.id).then(function (x) {
+          player.payBet(gs, x)
+          requestQueue.sendResponses(gs);
+        }
+
+        )));
 
       gs.spinCount++;
 
-    } while(!isBetRoundFinished(gs.activePlayers, gs.callAmount));
+    } while (!isBetRoundFinished(gs.activePlayers, gs.callAmount));
 
 
     // when a betting round ends
@@ -82,7 +89,7 @@ exports = module.exports = function* betLoop(gs){
 
     // ... and the pot should be re-opened
     // for the next iteration
-    gs.players.forEach(player => delete(player[hasTalked_]));
+    gs.players.forEach(player => delete (player[hasTalked_]));
 
 
 
@@ -93,7 +100,7 @@ exports = module.exports = function* betLoop(gs){
 
     const activePlayers = gs.activePlayers;
 
-    if (activePlayers.length == 1){
+    if (activePlayers.length == 1) {
 
       // only one active player.
       // the betting loop is completed
@@ -104,9 +111,9 @@ exports = module.exports = function* betLoop(gs){
         gs.gameProgressiveId, gs.handProgressiveId, gs.session, winner.name, { tag: gs.handUniqueId });
 
     }
-    else if (gs.commonCards.length < 5){
+    else if (gs.commonCards.length < 5) {
 
-      do { gs.commonCards.push(gs[deck_].shift()); } while(gs.commonCards.length < 3);
+      do { gs.commonCards.push(gs[deck_].shift()); } while (gs.commonCards.length < 3);
 
 
       // update hand session
@@ -116,8 +123,10 @@ exports = module.exports = function* betLoop(gs){
       logger.log('debug', 'Hand %d/%d, common cards (%s) are %s',
         gs.gameProgressiveId, gs.handProgressiveId, gs.session, getCommonCardsLogMessage(gs.commonCards), { tag: gs.handUniqueId });
 
-      yield save({ type: 'cards', handId: gs.handUniqueId, session: gs.session,
-        commonCards: gs.session == gameSession.flop ? gs.commonCards : gs.commonCards.slice(-1) });
+      yield save({
+        type: 'cards', handId: gs.handUniqueId, session: gs.session,
+        commonCards: gs.session == gameSession.flop ? gs.commonCards : gs.commonCards.slice(-1)
+      });
 
     }
     else {
@@ -150,8 +159,8 @@ exports = module.exports = function* betLoop(gs){
  *
  * @returns {GameSession}
  */
-function getGameSession(commonCards){
-  switch(commonCards){
+function getGameSession(commonCards) {
+  switch (commonCards) {
     case 0:
       return gameSession.pre;
     case 3:
@@ -186,7 +195,7 @@ function getGameSession(commonCards){
  */
 function isBetRoundFinished(activePlayers, callAmount) {
 
-  if (activePlayers.length == 1){
+  if (activePlayers.length == 1) {
     return true;
   }
 
@@ -212,12 +221,12 @@ function isBetRoundFinished(activePlayers, callAmount) {
  *
  * @returns {String}
  */
-function getPlayerStatusLogMessage(players){
-  return players.reduce(function(msg, player) {
+function getPlayerStatusLogMessage(players) {
+  return players.reduce(function (msg, player) {
     msg += player.status == playerStatus.out ?
       `${player.name} is out. ` : `${player.name} has bet ${player.chipsBet} (${player.status}). `;
     return msg;
-  }, '').trim().slice(0,-1);
+  }, '').trim().slice(0, -1);
 }
 
 
@@ -235,8 +244,8 @@ function getPlayerStatusLogMessage(players){
  *
  * @returns {String}
  */
-function getCommonCardsLogMessage(cards){
-  return cards.reduce(function(msg, card){
+function getCommonCardsLogMessage(cards) {
+  return cards.reduce(function (msg, card) {
     return msg += `${card.rank}${card.type}, `, msg;
-  }, '').trim().slice(0,-1);
+  }, '').trim().slice(0, -1);
 }

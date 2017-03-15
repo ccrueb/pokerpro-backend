@@ -28,11 +28,11 @@ const config = {
   BUYIN: 500,
 
   // the progression of small blinds
-  SMALL_BLINDS: [5, 10, 25, 50, 75, 100, 150, 200, 250, 300, 500, 750, 1000, 1500, 2000],
+  SMALL_BLINDS: [0, 10, 25, 50, 75, 100, 150, 200, 250, 300, 500, 750, 1000, 1500, 2000],
 
   // duration of a small blind value,
   // expressed in terms of "DB turns of the table"
-  BLINDS_PERIOD: 1,
+  BLINDS_PERIOD: 10,
 
   // antes are a set amount put in the pot by every player in the game
   // prior to cards being dealt.
@@ -78,8 +78,8 @@ else if (process.env.NODE_ENV === 'test'){
   // Configuration as the unit tests expect it to be
   // Do not change!
   config.BUYIN = 500;
-  config.SMALL_BLINDS = [10, 20, 25, 50, 100, 125, 200, 250, 500, 750, 1000];
-  config.BLINDS_PERIOD = 1;
+  config.SMALL_BLINDS = [0, 20, 25, 50, 100, 125, 200, 250, 500, 750, 1000];
+  config.BLINDS_PERIOD = 100;
   config.ENABLE_ANTE = true;
 
 }

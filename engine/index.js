@@ -6,9 +6,6 @@ const config = require('./config');
 const events = require('events');
 const EventEmitter = events.EventEmitter;
 
-
-
-
 const setup_ = Symbol('setup-tournament-method');
 const tournaments_ = Symbol('tournament-collection');
 
@@ -42,6 +39,8 @@ const gamestate = Object.create(EventEmitter.prototype, {
       gs.tournamentId = tournamentId;
       gs.gameProgressiveId = gameId;
       gs.handProgressiveId = 1;
+
+      gs.requests = new Map();
 
       gs.handUniqueId = `${gs.pid}_${gs.tournamentId}_${gs.gameProgressiveId}-${gs.handProgressiveId}`;
 
@@ -193,7 +192,40 @@ const gamestate = Object.create(EventEmitter.prototype, {
       logger.info('Tournament %s is going to finish.', gs.tournamentId, { tag: gs.tournamentId });
       gs.tournamentStatus = tournamentStatus.latest;
     }
-  }
+  },
+
+  /**
+   * @function
+   * @name addRequest
+   * @desc sends request 
+   *
+   * @param {string} tournamentId:
+   *  unique identifier for the current tournament
+   * @param {Number} playerId:
+   *  id of the player sending the req
+   *
+   * @returns void
+   */
+  addRequest: {
+    value: function(req, res){
+
+      const gs = this[tournaments_].get(req.params.gameId);
+
+
+      if (gs == undefined) {
+        
+        //No game found at this id
+        res.send("no game found");
+      } else {
+
+      //Pipe information to gamestate
+      gs.requests.set(req.params.playerId, {req: req, res: res});
+
+      }
+
+      
+    }
+  },
 
 });
 
