@@ -263,13 +263,15 @@ const actions = {
 
     return new Promise((resolve, reject) => {
 
+      //Check requestQ for a request with a bet parameter from player with current move
       var interval = setInterval(function () {
-        if (gs.requests.get(id) && gs.requests.get(id).params && gs.requests.get(id).params.bet) {
+        if (gs.requests.get(id) && gs.requests.get(id).req.params && gs.requests.get(id).req.params.bet) {
+          console.log("RECIEVED A BET");
           //Clear timer and interval
           clearInterval(interval);
           clearTimeout(timer);
 
-          resolve(sanitizeAmount(gs.requests.get(this.id).params.bet));
+          resolve(sanitizeAmount(gs.requests.get(id).req.params.bet));
         }
       }, 100);
 
