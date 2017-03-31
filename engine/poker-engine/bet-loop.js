@@ -35,8 +35,7 @@ const asyncFrom = require('./lib/loop-from-async');
 exports = module.exports = function* betLoop(gs) {
 
   logger.info('Hand %d/%d, starting betting session', gs.gameProgressiveId, gs.handProgressiveId, { tag: gs.handUniqueId });
-  requestQueue.sendResponses(gs);
-
+  
   const deck_ = Symbol.for('cards-deck');
   const hasBB_ = Symbol.for('has-big-blind');
   const hasDB_ = Symbol.for('has-dealer-button');
@@ -71,12 +70,24 @@ exports = module.exports = function* betLoop(gs) {
     do {
 
       yield* asyncFrom(gs.players, startIndex, shouldBreak.bind(null, gs),
-        player => shouldBet(gs, player, player => player.talk(gs, player.id).then(function (x) {
-          player.payBet(gs, x)
-          requestQueue.sendResponses(gs);
-        }
 
-        )));
+        player => shouldBet(gs, player,
+
+          player => {
+
+            //Set current player
+            gs.currentPlayer = player.id;
+
+            //Send gamestate
+            requestQueue.sendResponses(gs);
+
+            return player.talk(gs, player.id)
+              .then(function (x) {
+                player.payBet(gs, x)
+              })
+          }
+        )
+      );
 
       gs.spinCount++;
 

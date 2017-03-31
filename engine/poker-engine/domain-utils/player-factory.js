@@ -284,18 +284,7 @@ const actions = {
 
         resolve(0);
 
-      }, 5 * 1000);
-
-
-
-      // request.post(`${this.serviceUrl}bet`, requestSettings, (err, response, playerBetAmount) => {
-      //   if (err){
-      //     logger.warn('Bet request to %s failed, cause %s', this.serviceUrl, err.message, { tag: gs.handUniqueId });
-      //     return void resolve(0);
-      //   }
-      //   logger.log('silly', '%s (%s) has bet %s (raw)', this.name, this.id, playerBetAmount, { tag: gs.handUniqueId });
-      //   resolve(sanitizeAmount(playerBetAmount));
-      // });
+      }, 30 * 1000);
     });
 
   },
@@ -371,6 +360,9 @@ const actions = {
 
     // index of the player 'this' in the players array
     state.me = gs.players.findIndex(player => player.id == this.id);
+
+    //Id of current players turn
+    state.currentPlayer = gs.currentPlayer;
 
     return state;
   },
