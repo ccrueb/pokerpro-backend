@@ -76,8 +76,9 @@ const gamestate = Object.create(EventEmitter.prototype, {
       logger.log('debug', 'Tournament players are: %s', gs.players.map(p => p.name).toString().replace(/,/g, ', '), { tag: gs.handUniqueId });
 
 
-      // start the game
-      return void run(gameloop, gs)
+      // start the game - this makes it so the game doesn't start for one second so clients have time to send request and get initial game state.
+      setTimeout(function () {
+        run(gameloop, gs)
         .then(function() {
           logger.info('Tournament %s is just finished.', tournamentId, { tag: gs.handUniqueId });
           this[tournaments_].delete(tournamentId);
@@ -90,6 +91,8 @@ const gamestate = Object.create(EventEmitter.prototype, {
           logger.error('An error occurred during tournament %s.', gs.tournamentId, errorTag);
           logger.error('Error: %s.\nStacktrace: %s', err.message, err.stack, errorTag);
         });
+      }, 1000)
+      
     }
   },
 
