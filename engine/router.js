@@ -25,6 +25,10 @@ exports = module.exports = {
             matchMaker.addPlayer({id: req.params.playerId, res: res});   
         });
 
+        app.get('/leave/:gameId/:playerId' ,function (req, res) {
+            //TODO remove player from game
+        });
+
         server.listen(port, function () {
             console.log('Server listening on port', server.address().port);
         });

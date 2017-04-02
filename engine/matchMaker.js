@@ -1,5 +1,6 @@
 function MatchMaker(engine) {
     this.engine = engine;
+    //TODO Add two more queues for different ELOs
     this.queue = [];
     this.totalGames = 0;
 }
@@ -10,7 +11,11 @@ var gameSize = 3;
 MatchMaker.prototype.addPlayer = function (joinObj) {
 
     console.log("Player: " + joinObj.id + " has joined the queue");
+    
+    //TODO check players elo to put them into the correct queue
     this.queue.push(joinObj);
+
+    //TODO search engine for games that have emtpy seats
 
     if (this.queue.length >= gameSize) {
         this.totalGames += 1;
