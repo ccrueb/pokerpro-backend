@@ -6,7 +6,7 @@ function MatchMaker(engine) {
 }
 
 //TODO: Change this. It is a low # to make testing easier
-var gameSize = 3;
+var gameSize = 2;
 
 MatchMaker.prototype.addPlayer = function (joinObj) {
 

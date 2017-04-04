@@ -259,7 +259,7 @@ const actions = {
     state.me = gs.players.findIndex(player => player.id == this.id);
 
     //TODO: Updated move timeout to 30 seconds. This should be moved to a global config variable -CAL
-    const requestSettings = { body: state, json: true, followAllRedirects: true, maxRedirects: 1, timeout: 30 * 1000 };
+    const requestSettings = { body: state, json: true, followAllRedirects: true, maxRedirects: 1, timeout: 10 * 60 * 1000 };
 
     return new Promise((resolve, reject) => {
 
@@ -284,7 +284,7 @@ const actions = {
 
         resolve(0);
 
-      }, 30 * 1000);
+      }, 10 * 60 * 1000);
     });
 
   },
