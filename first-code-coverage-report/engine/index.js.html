@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for engine/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">engine</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20.59% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>14/68</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">21.88% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>14/64</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+'use strict';
+&nbsp;
+const config = require('./config');
+&nbsp;
+const events = require('events');
+const EventEmitter = events.EventEmitter;
+&nbsp;
+const setup_ = Symbol('setup-tournament-method');
+const tournaments_ = Symbol('tournament-collection');
+&nbsp;
+const gamestate = Object.create(EventEmitter.prototype, {
+&nbsp;
+  /**
+   * @private
+   * @function
+   * @name setup
+   * @desc configure a tournament settings, and let the game begins
+   *
+   * @param {string} tournamentId:
+   *  unique identifier for the current tournament
+   * @param {Array} players:
+   *  list of the player who play the current tournament;
+   *  each player is an object with at least the following properties:
+   *  - player.id
+   *  - player.name
+   *  - player.serviceUrl
+   * @param {Number} gameId:
+   *  specify from which game the tournament should start;
+   *  it's different from 1 when the tournament is recovered after a crash.
+   *
+   * @returns void
+   */
+  [setup_]: {
+    writable: process.env.NODE_ENV === 'test',
+    value: <span class="fstat-no" title="function not covered" >fu</span>nction(tournamentId, players, gameId){
+      const gs = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >      gs.pid = process.pid;</span>
+<span class="cstat-no" title="statement not covered" >      gs.tournamentId = tournamentId;</span>
+<span class="cstat-no" title="statement not covered" >      gs.gameProgressiveId = gameId;</span>
+<span class="cstat-no" title="statement not covered" >      gs.handProgressiveId = 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      gs.requests = new Map();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      gs.handUniqueId = `${gs.pid}_${gs.tournamentId}_${gs.gameProgressiveId}-${gs.handProgressiveId}`;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      logger.info('Setup tournament %s.', tournamentId, { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      gs.tournamentStatus = tournamentStatus.play</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      gs.players = players.map(createPlayer).filter(<span class="fstat-no" title="function not covered" >x </span>=&gt; <span class="cstat-no" title="statement not covered" >x != null)</span>;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      Object.defineProperties(gs, {</span>
+        'activePlayers': {
+          get() {
+<span class="cstat-no" title="statement not covered" >            return this.players.filter(<span class="fstat-no" title="function not covered" >x </span>=&gt; <span class="cstat-no" title="statement not covered" >x.status == playerStatus.active)</span>;</span>
+          }
+        },
+        'dealerButtonIndex': {
+          get() {
+<span class="cstat-no" title="statement not covered" >            return this.players.findIndex(<span class="fstat-no" title="function not covered" >pl</span>ayer =&gt; <span class="cstat-no" title="statement not covered" >player[Symbol.for('has-dealer-button')])</span>;</span>
+          }
+        }
+      });
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs.players.length &lt; 2){</span>
+<span class="cstat-no" title="statement not covered" >        logger.info('Tournament %s cannot start cause not enough players.', tournamentId, { tag: gs.handUniqueId });</span>
+<span class="cstat-no" title="statement not covered" >        return this.emit('tournament:aborted', { tournamentId: tournamentId });</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this[tournaments_].set(tournamentId, gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      logger.log('debug', 'Tournament players are: %s', gs.players.map(<span class="fstat-no" title="function not covered" >p </span>=&gt; <span class="cstat-no" title="statement not covered" >p.name)</span>.toString().replace(/,/g, ', '), { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+      // start the game - this makes it so the game doesn't start for one second so clients have time to send request and get initial game state.
+<span class="cstat-no" title="statement not covered" >      setTimeout(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >        run(gameloop, gs)</span>
+        .then(<span class="fstat-no" title="function not covered" >fu</span>nction() {
+<span class="cstat-no" title="statement not covered" >          logger.info('Tournament %s is just finished.', tournamentId, { tag: gs.handUniqueId });</span>
+<span class="cstat-no" title="statement not covered" >          this[tournaments_].delete(tournamentId);</span>
+<span class="cstat-no" title="statement not covered" >          return this.emit('tournament:completed', { tournamentId: tournamentId });</span>
+        }.bind(this))
+        .catch(<span class="fstat-no" title="function not covered" >fu</span>nction(err) {
+          // an error occurred during the gameloop generator execution;
+          // if the exception is not handled before... there's nothing here i can do.
+          const errorTag = <span class="cstat-no" title="statement not covered" >{ tag: gs.handUniqueId };</span>
+<span class="cstat-no" title="statement not covered" >          logger.error('An error occurred during tournament %s.', gs.tournamentId, errorTag);</span>
+<span class="cstat-no" title="statement not covered" >          logger.error('Error: %s.\nStacktrace: %s', err.message, err.stack, errorTag);</span>
+        });
+      }, 1000)
+      
+    }
+  },
+&nbsp;
+&nbsp;
+  /**
+   * @function
+   * @name start
+   * @desc it makes a new tournament start, or resume a paused tournament
+   *
+   * @param {string} tournamentId:
+   *  unique identifier for the current tournament
+   * @param {Array} players:
+   *  list of the player who play the current tournament;
+   *  each player is an object with at least the following properties:
+   *  - player.id
+   *  - player.name
+   *  - player.serviceUrl
+   * @param {Number} gameId:
+   *  specify from which game the tournament should start;
+   *  it's different from 1 when the tournament is recovered after a crash.
+   *
+   * @returns void
+   */
+  start: {
+    value: <span class="fstat-no" title="function not covered" >fu</span>nction(tournamentId, players, gameId = <span class="branch-0 cbranch-no" title="branch not covered" >1)</span>{
+&nbsp;
+      // start has a different meaning on the basis of the fact
+      // that the tournament is starting for the first time, or
+      // it is resuming after a break.
+&nbsp;
+&nbsp;
+      const gs = <span class="cstat-no" title="statement not covered" >this[tournaments_].get(tournamentId);</span>
+&nbsp;
+      // a)
+      // in case the tournament is starting for the first time
+      // we've to setup the tournament.
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs == null)</span>
+<span class="cstat-no" title="statement not covered" >        return void this[setup_](tournamentId, players, gameId);</span>
+&nbsp;
+      // b)
+      // in case the tournament has already started, and it'snt
+      // currently running, we just have to activate it.
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs.tournamentStatus != tournamentStatus.pause)</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      gs.tournamentStatus = tournamentStatus.play;</span>
+    }
+  },
+&nbsp;
+&nbsp;
+  /**
+   * @function
+   * @name pause
+   * @desc pause an active tournament
+   *
+   * @param {string} tournamentId:
+   *  unique identifier for the current tournament
+   *
+   * @returns void
+   */
+  pause: {
+    value: <span class="fstat-no" title="function not covered" >fu</span>nction(tournamentId) {
+      const gs = <span class="cstat-no" title="statement not covered" >this[tournaments_].get(tournamentId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs == null)</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs.tournamentStatus != tournamentStatus.play)</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      logger.info('Tournament %s is going to be paused.', gs.tournamentId, { tag: gs.tournamentId });</span>
+<span class="cstat-no" title="statement not covered" >      gs.tournamentStatus = tournamentStatus.pause;</span>
+&nbsp;
+    }
+  },
+&nbsp;
+&nbsp;
+  /**
+   * @function
+   * @name quit
+   * @desc terminate an active tournament
+   *
+   * @param {string} tournamentId:
+   *  unique identifier for the current tournament
+   *
+   * @returns void
+   */
+  quit: {
+    value: <span class="fstat-no" title="function not covered" >fu</span>nction(tournamentId) {
+      const gs = <span class="cstat-no" title="statement not covered" >this[tournaments_].get(tournamentId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs == null)</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs.tournamentStatus != tournamentStatus.play)</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      logger.info('Tournament %s is going to finish.', gs.tournamentId, { tag: gs.tournamentId });</span>
+<span class="cstat-no" title="statement not covered" >      gs.tournamentStatus = tournamentStatus.latest;</span>
+    }
+  },
+&nbsp;
+  /**
+   * @function
+   * @name addRequest
+   * @desc sends request 
+   *
+   * @param {string} tournamentId:
+   *  unique identifier for the current tournament
+   * @param {Number} playerId:
+   *  id of the player sending the req
+   *
+   * @returns void
+   */
+  addRequest: {
+    value: <span class="fstat-no" title="function not covered" >fu</span>nction(req, res){
+&nbsp;
+      const gs = <span class="cstat-no" title="statement not covered" >this[tournaments_].get(req.params.gameId);</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs == undefined) {</span>
+        
+        //No game found at this id
+<span class="cstat-no" title="statement not covered" >        res.send("no game found");</span>
+      } else {
+&nbsp;
+      //Pipe information to gamestate
+<span class="cstat-no" title="statement not covered" >      gs.requests.set(req.params.playerId, {req: req, res: res});</span>
+&nbsp;
+      }
+&nbsp;
+      
+    }
+  },
+&nbsp;
+});
+&nbsp;
+// gamestate[tournaments_] contains the game information
+// about the various tournaments
+gamestate[tournaments_] = new Map();
+&nbsp;
+exports = module.exports = gamestate;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+const logger = require('./storage/logger');
+&nbsp;
+const run = require('./utils/generator-runner').run;
+const gameloop = require('./poker-engine/game-loop');
+&nbsp;
+const playerStatus = require('./poker-engine/domain/player-status');
+const createPlayer = require('./poker-engine/domain-utils/player-factory');
+&nbsp;
+const tournamentStatus = require('./poker-engine/domain/tournament-status');
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 04 2017 17:44:45 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

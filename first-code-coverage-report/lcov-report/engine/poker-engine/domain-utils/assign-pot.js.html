@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for engine/poker-engine/domain-utils/assign-pot.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">engine/poker-engine/domain-utils/</a> assign-pot.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">7.89% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.38% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/32</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+'use strict';
+&nbsp;
+const loopFrom = require('../lib/loop-from');
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @function
+ * @name assignPot
+ * @desc assign the pot to the player with strongest combination
+ *
+ * @param {Object} gs:
+ *  the gamestate object
+ *
+ * @returns void
+ */
+exports = module.exports = <span class="fstat-no" title="function not covered" >function assignPot(gs) {</span>
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function assignChips(playerId, amount = gs.pot){</span>
+<span class="cstat-no" title="statement not covered" >    const player = gs.players.find(player =&gt; <span class="cstat-no" title="statement not covered" >player.id == playerId)</span>;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    player.chips += amount;</span>
+<span class="cstat-no" title="statement not covered" >    gs.pot -= amount;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const winner = gs.winners.find(player =&gt; <span class="cstat-no" title="statement not covered" >player.id == playerId)</span>;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (winner){</span>
+<span class="cstat-no" title="statement not covered" >      return void (winner.amount += amount);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    gs.winners.push({ id: player.id, name: player.name, amount: amount });</span>
+  }
+&nbsp;
+&nbsp;
+&nbsp;
+  // setup the empty array of the players
+  // who receive at least a chip
+<span class="cstat-no" title="statement not covered" >  gs.winners = [];</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const activePlayers = gs.activePlayers;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+  //  shortcut
+  //  when there is only an active player,
+  //  he takes the full pot
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (activePlayers.length == 1){</span>
+<span class="cstat-no" title="statement not covered" >    return void assignChips(activePlayers[0].id);</span>
+  }
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (gs.sidepots.length == 0){</span>
+<span class="cstat-no" title="statement not covered" >    gs.sidepots.push({ quote: gs.callAmount, amount: gs.pot });</span>
+  }
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  gs.sidepots.forEach(<span class="fstat-no" title="function not covered" >function(sidepot){</span></span>
+&nbsp;
+    // players who have the right to get this sidepot
+<span class="cstat-no" title="statement not covered" >    const sidepotContenders = gs.handChart.filter(x =&gt; <span class="cstat-no" title="statement not covered" >x.quote &gt;= sidepot.quote)</span>;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const firstContender = sidepotContenders[0];</span>
+<span class="cstat-no" title="statement not covered" >    const exequoTag = firstContender.bestCombinationData.exequo;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (sidepotContenders.length == 1 || !exequoTag){</span>
+<span class="cstat-no" title="statement not covered" >      return void assignChips(firstContender.id, sidepot.amount);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const exequoContenders = sidepotContenders.filter(x =&gt; <span class="cstat-no" title="statement not covered" >x.bestCombinationData.exequo == exequoTag)</span>;</span>
+<span class="cstat-no" title="statement not covered" >    const sidepotSplittedAmount = sidepot.amount / exequoContenders.length;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    exequoContenders.forEach(contender =&gt; <span class="cstat-no" title="statement not covered" >assignChips(contender.id, Math.floor(sidepotSplittedAmount)))</span>;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+    // in the case of a split pot,
+    // the chip(s) will be split as evenly as possible,
+    // with any odd chip(s) left over given out to the winning player
+    // with the worst position (left of the button being the worst).
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const excidingChips = sidepot.amount % exequoContenders.length;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (excidingChips &gt; 0){</span>
+<span class="cstat-no" title="statement not covered" >      let assigned = false;</span>
+<span class="cstat-no" title="statement not covered" >      loopFrom(gs.players, gs.dealerButtonIndex, <span class="fstat-no" title="function not covered" >function(player) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!assigned &amp;&amp; exequoContenders.find(contender =&gt; <span class="cstat-no" title="statement not covered" >contender.id == player.id)</span>){</span>
+<span class="cstat-no" title="statement not covered" >          assignChips(player.id, excidingChips);</span>
+<span class="cstat-no" title="statement not covered" >          assigned = true;</span>
+        }
+      });
+    }
+&nbsp;
+  });
+&nbsp;
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 04 2017 17:41:10 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for engine/poker-engine/game-loop.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">engine/poker-engine/</a> game-loop.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">21.43% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>12/56</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">23.53% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>12/51</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+'use strict';
+&nbsp;
+const config = require('../config');
+&nbsp;
+const logger = require('../storage/logger');
+const save = require('../storage/storage').save;
+&nbsp;
+const gameStatus = require('./domain/tournament-status');
+const playerStatus = require('./domain/player-status');
+&nbsp;
+&nbsp;
+const runSetupTasks = require('./setup-tasks');
+const runTeardownTasks = require('./teardown-tasks');
+&nbsp;
+const play = require('./bet-loop');
+&nbsp;
+&nbsp;
+&nbsp;
+exports = module.exports = <span class="fstat-no" title="function not covered" >function* dealer(gs){</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function sleep(time) {</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise(res =&gt; <span class="cstat-no" title="statement not covered" >setTimeout(res, time))</span>;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function waitResume() {</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >function(res, rej) {</span></span>
+<span class="cstat-no" title="statement not covered" >      const time = setInterval(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (gs.tournamentStatus == gameStatus.play){</span>
+<span class="cstat-no" title="statement not covered" >          res(clearInterval(time));</span>
+        }
+      }, 5000);
+    });
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  while (gs.tournamentStatus != gameStatus.stop){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const activePlayers = gs.activePlayers;</span>
+<span class="cstat-no" title="statement not covered" >    const foldedPlayers = gs.players.filter(player =&gt; <span class="cstat-no" title="statement not covered" >player.status == playerStatus.folded)</span>;</span>
+&nbsp;
+&nbsp;
+    // when before a new hand starts,
+    // there is only one active player
+    // the current game is finished.
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (activePlayers.length + foldedPlayers.length === 1){</span>
+&nbsp;
+      // each player takes points
+      // on the basis of their rank...
+      // then eventually a new game starts.
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      const playerCount = gs.gameChart.unshift(activePlayers[0].name);</span>
+<span class="cstat-no" title="statement not covered" >      const points = config.AWARDS[playerCount-2];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      const finalGameChart = gs.gameChart.map((playerName, i) =&gt; (<span class="cstat-no" title="statement not covered" >{ name: playerName, pts: points[i] })</span>);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      logger.info('Final ranks for game %d: %s', gs.gameProgressiveId, getRankingLogMessage(finalGameChart), { tag: gs.handUniqueId })</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      yield save({ type: 'points', tournamentId: gs.tournamentId, gameId: gs.gameProgressiveId, rank: finalGameChart });</span>
+&nbsp;
+&nbsp;
+&nbsp;
+      // restore players' initial conditions
+<span class="cstat-no" title="statement not covered" >      gs.players.forEach(player =&gt; { <span class="cstat-no" title="statement not covered" >player.status = playerStatus.active; <span class="cstat-no" title="statement not covered" ></span>player.chips = config.BUYIN; </span>});</span>
+<span class="cstat-no" title="statement not covered" >      gs.gameChart = null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (gs.tournamentStatus == gameStatus.latest || gs.gameProgressiveId == config.MAX_GAMES){</span>
+<span class="cstat-no" title="statement not covered" >        gs.tournamentStatus = gameStatus.stop;</span>
+<span class="cstat-no" title="statement not covered" >        continue;</span>
+      }
+&nbsp;
+&nbsp;
+&nbsp;
+      // warm up
+<span class="cstat-no" title="statement not covered" >      if (config.WARMUP){</span>
+<span class="cstat-no" title="statement not covered" >        if (gs.gameProgressiveId &lt;= config.WARMUP.GAME){</span>
+<span class="cstat-no" title="statement not covered" >          yield sleep(config.WARMUP.WAIT);</span>
+        }
+      }
+&nbsp;
+      // start a new game
+<span class="cstat-no" title="statement not covered" >      gs.handProgressiveId = 1;</span>
+<span class="cstat-no" title="statement not covered" >      gs.gameProgressiveId++;</span>
+    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    gs.handUniqueId = `${gs.pid}_${gs.tournamentId}_${gs.gameProgressiveId}-${gs.handProgressiveId}`;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    logger.info('Starting hand %d/%d', gs.gameProgressiveId, gs.handProgressiveId, { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+&nbsp;
+    //
+    // break here until the tournament is resumed
+<span class="cstat-no" title="statement not covered" >    if (gs.tournamentStatus == gameStatus.pause){</span>
+<span class="cstat-no" title="statement not covered" >      logger.info('Pause on hand %d/%d', gs.gameProgressiveId, gs.handProgressiveId, { tag: gs.handUniqueId });</span>
+<span class="cstat-no" title="statement not covered" >      yield waitResume();</span>
+    }
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (gs.tournamentStatus == gameStatus.play || gs.tournamentStatus == gameStatus.latest){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (config.HANDWAIT){</span>
+<span class="cstat-no" title="statement not covered" >        yield sleep(config.HANDWAIT);</span>
+      }
+&nbsp;
+      // setup the hand:
+      // restore the initial condition for a new hand, pot,
+      // blinds, ante, cards ...
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      runSetupTasks(gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      yield save({ type: 'setup', handId: gs.handUniqueId, pot: gs.pot, sb: gs.sb, ante: gs.ante || 0, players: gs.players });</span>
+&nbsp;
+&nbsp;
+      // play the game
+      // each player will be asked to make a bet,
+      // until only one player remains active, or
+      // the hand arrive to the "river" session
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      yield* play(gs);</span>
+&nbsp;
+&nbsp;
+      // find the winner of the hand, eliminated players, ...
+      // and updates accordingly the gamestate
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      yield* runTeardownTasks(gs);</span>
+&nbsp;
+    }
+&nbsp;
+&nbsp;
+    //
+    // this is the gs.handProgressiveId° hand played
+    // this info is important to compute the blinds level
+<span class="cstat-no" title="statement not covered" >    gs.handProgressiveId++;</span>
+&nbsp;
+  }
+&nbsp;
+};
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @private
+ * @function
+ * @name getRankingLogMessage
+ * @desc
+ *  return a log of the final rankings
+ *
+ * @param {Array} players
+ *  sorted list of the players, and points
+ *
+ * @returns {String}
+ */
+<span class="fstat-no" title="function not covered" >function getRankingLogMessage(ranking){</span>
+<span class="cstat-no" title="statement not covered" >  return ranking.reduce(<span class="fstat-no" title="function not covered" >function(msg, player) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return msg += `${player.name}: ${player.pts}, `, msg;</span>
+  }, '').trim().slice(0,-1);
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 04 2017 17:41:10 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

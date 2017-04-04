@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for engine/poker-engine/setup-tasks.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">engine/poker-engine</a> setup-tasks.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">34.48% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>10/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35.71% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>10/28</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+'use strict';
+&nbsp;
+const config = require('../config');
+&nbsp;
+const logger = require('../storage/logger');
+&nbsp;
+const playerStatus = require('./domain/player-status');
+&nbsp;
+const resetGamestate = require('./domain-utils/reset-gamestate');
+const assignDealerButton = require('./domain-utils/assign-dealer-button');
+const computeSmallBlind = require('./domain-utils/compute-small-blind');
+const payAntes = require('./domain-utils/pay-antes');
+const payBlinds = require('./domain-utils/pay-blinds');
+const assignCards = require('./domain-utils/assign-cards');
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @function
+ * @name setup
+ * @desc
+ *  prepare the game state for a new poker hand.
+ *
+ * @param {Object} gs:
+ *  the gamestate object
+ *
+ * @returns {void}
+ */
+exports = module.exports = function <span class="fstat-no" title="function not covered" >setup(</span>gs){
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.info('Hand %d/%d, starting setup ops', gs.gameProgressiveId, gs.handProgressiveId, { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  resetGamestate(gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.log('debug', 'Gamestate has been restored to hand initial condition.', { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+&nbsp;
+  // assign to the player in turn the dealer button
+  // (only an active player can receive the button)
+<span class="cstat-no" title="statement not covered" >  assignDealerButton(gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.log('debug', 'Dealer Button has been assigned (%d).', gs.dealerButtonIndex, { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+&nbsp;
+  // compute the small blind level for the current hand
+  // big blinds is always the double
+<span class="cstat-no" title="statement not covered" >  computeSmallBlind(gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.log('debug', 'Small Blind has been computed; its value is %d.', gs.sb, { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+&nbsp;
+  // make each active player pay the "ante"
+<span class="cstat-no" title="statement not covered" >  payAntes(gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (gs.ante){</span>
+<span class="cstat-no" title="statement not covered" >    logger.log('debug', 'Players have pay the ante amount. Pot is %d.', gs.pot, { tag: gs.handUniqueId });</span>
+  }
+&nbsp;
+&nbsp;
+&nbsp;
+  // make the players next to the dealer button
+  // pay small/big blind amount
+<span class="cstat-no" title="statement not covered" >  payBlinds(gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.log('debug', 'Blinds were payed. Pot is %d; Minimum amount to play is %d.', gs.pot, gs.callAmount, { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+&nbsp;
+  // assign two private cards to each active player
+<span class="cstat-no" title="statement not covered" >  assignCards(gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.log('debug', getAssignedCardsLogMessage(gs.players), { tag: gs.handUniqueId });</span>
+&nbsp;
+}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @private
+ * @function
+ * @name getAssignedCardsLogMessage
+ * @desc
+ *  return a log of the assigned cards
+ *
+ * @param {Array} players
+ *  list of the players
+ *
+ * @returns {String}
+ */
+function <span class="fstat-no" title="function not covered" >getAssignedCardsLogMessage(</span>players){
+<span class="cstat-no" title="statement not covered" >  return players.reduce(<span class="fstat-no" title="function not covered" >fu</span>nction(msg, player) {</span>
+<span class="cstat-no" title="statement not covered" >    msg += player.status == playerStatus.active ?</span>
+      `${player.name} has ${player.cards.reduce(<span class="fstat-no" title="function not covered" >fu</span>nction(all, card){ <span class="cstat-no" title="statement not covered" >all += `${card.rank}${card.type}, `; <span class="cstat-no" title="statement not covered" ></span>return all; </span>}, '').trim().slice(0,-1)}. ` : `${player.name} is out. `;
+<span class="cstat-no" title="statement not covered" >    return msg;</span>
+  }, '').trim();
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 04 2017 17:44:45 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

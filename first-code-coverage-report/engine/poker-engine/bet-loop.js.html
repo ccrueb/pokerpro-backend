@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for engine/poker-engine/bet-loop.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">engine/poker-engine</a> bet-loop.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.13% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>10/62</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">17.24% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>10/58</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+'use strict';
+&nbsp;
+const config = require('../config');
+&nbsp;
+const logger = require('../storage/logger');
+const save = require('../storage/storage').save;
+&nbsp;
+&nbsp;
+const gameSession = require('./domain/game-session');
+const playerStatus = require('./domain/player-status');
+&nbsp;
+const shouldBet = require('./domain-utils/should-bet');
+const shouldBreak = require('./domain-utils/should-break');
+&nbsp;
+var requestQueue = require('./domain-utils/request-queue');
+&nbsp;
+&nbsp;
+const asyncFrom = require('./lib/loop-from-async');
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @function
+ * @name betLoop
+ * @desc
+ *  It's the generator that controls the betting loop.
+ *  It's completed after the "river", or when all the players but one have folded
+ *
+ * @param {Object} gs:
+ *  the gamestate object
+ *
+ * @returns {void}
+ */
+exports = module.exports = function* <span class="fstat-no" title="function not covered" >betLoop(</span>gs) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.info('Hand %d/%d, starting betting session', gs.gameProgressiveId, gs.handProgressiveId, { tag: gs.handUniqueId });</span>
+  
+  const deck_ = <span class="cstat-no" title="statement not covered" >Symbol.for('cards-deck');</span>
+  const hasBB_ = <span class="cstat-no" title="statement not covered" >Symbol.for('has-big-blind');</span>
+  const hasDB_ = <span class="cstat-no" title="statement not covered" >Symbol.for('has-dealer-button');</span>
+  const hasTalked_ = <span class="cstat-no" title="statement not covered" >Symbol.for('has-talked');</span>
+&nbsp;
+&nbsp;
+&nbsp;
+  // the betting loop continues until
+  // all the community cards are shown
+  // and there are more than an active player
+<span class="cstat-no" title="statement not covered" >  while (gs.commonCards.length &lt;= 5 &amp;&amp; gs.activePlayers.length &gt; 1) {</span>
+&nbsp;
+&nbsp;
+&nbsp;
+    // track the current hand session
+<span class="cstat-no" title="statement not covered" >    gs.session = getGameSession(gs.commonCards.length);</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    logger.log('debug', 'Hand %d/%d, %s', gs.gameProgressiveId, gs.handProgressiveId, gs.session, { tag: gs.handUniqueId });</span>
+<span class="cstat-no" title="statement not covered" >    logger.log('debug', getPlayerStatusLogMessage(gs.players), { tag: gs.handUniqueId });</span>
+&nbsp;
+&nbsp;
+&nbsp;
+    // count the number of time that players had already have the possibility
+    // to bet in the current session.
+<span class="cstat-no" title="statement not covered" >    gs.spinCount = 0;</span>
+&nbsp;
+    const starterButton = <span class="cstat-no" title="statement not covered" >gs.session == gameSession.pre ? hasBB_ : hasDB_;</span>
+    const startIndex = <span class="cstat-no" title="statement not covered" >gs.players.findIndex(<span class="fstat-no" title="function not covered" >pl</span>ayer =&gt; <span class="cstat-no" title="statement not covered" >player[starterButton])</span>;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    do {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      yield* asyncFrom(gs.players, startIndex, shouldBreak.bind(null, gs),</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >        pl</span>ayer =&gt; <span class="cstat-no" title="statement not covered" >shouldBet(gs, player,</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >          pl</span>ayer =&gt; {
+&nbsp;
+            //Set current player
+<span class="cstat-no" title="statement not covered" >            gs.currentPlayer = player.id;</span>
+&nbsp;
+            //Send gamestate
+<span class="cstat-no" title="statement not covered" >            requestQueue.sendResponses(gs);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return player.talk(gs, player.id)</span>
+              .then(<span class="fstat-no" title="function not covered" >fu</span>nction (x) {
+<span class="cstat-no" title="statement not covered" >                player.payBet(gs, x)</span>
+              })
+          }
+        )
+      );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      gs.spinCount++;</span>
+&nbsp;
+    } while (!isBetRoundFinished(gs.activePlayers, gs.callAmount));
+&nbsp;
+&nbsp;
+    // when a betting round ends
+    // raise data should be cleared
+<span class="cstat-no" title="statement not covered" >    gs.lastRaiseAmount = 0;</span>
+&nbsp;
+    // ... and the pot should be re-opened
+    // for the next iteration
+<span class="cstat-no" title="statement not covered" >    gs.players.forEach(<span class="fstat-no" title="function not covered" >pl</span>ayer =&gt; <span class="cstat-no" title="statement not covered" >delete (player[hasTalked_]))</span>;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+    // when execution reach this line,
+    // all players have defined their bet for the current session.
+&nbsp;
+    const activePlayers = <span class="cstat-no" title="statement not covered" >gs.activePlayers;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (activePlayers.length == 1) {</span>
+&nbsp;
+      // only one active player.
+      // the betting loop is completed
+&nbsp;
+      const winner = <span class="cstat-no" title="statement not covered" >activePlayers[0];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return void logger.info('Hand %d/%d, after the %s session, the only active player is %s',</span>
+        gs.gameProgressiveId, gs.handProgressiveId, gs.session, winner.name, { tag: gs.handUniqueId });
+&nbsp;
+    }
+    else <span class="cstat-no" title="statement not covered" >if (gs.commonCards.length &lt; 5) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      do { <span class="cstat-no" title="statement not covered" >gs.commonCards.push(gs[deck_].shift()); </span>} while (gs.commonCards.length &lt; 3);</span>
+&nbsp;
+&nbsp;
+      // update hand session
+<span class="cstat-no" title="statement not covered" >      gs.session = getGameSession(gs.commonCards.length);</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      logger.log('debug', 'Hand %d/%d, common cards (%s) are %s',</span>
+        gs.gameProgressiveId, gs.handProgressiveId, gs.session, getCommonCardsLogMessage(gs.commonCards), { tag: gs.handUniqueId });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      yield save({</span>
+        type: 'cards', handId: gs.handUniqueId, session: gs.session,
+        commonCards: gs.session == gameSession.flop ? gs.commonCards : gs.commonCards.slice(-1)
+      });
+&nbsp;
+    }
+    else {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      logger.log('debug', 'Hand %d/%d, after the %s session', gs.gameProgressiveId, gs.handProgressiveId, gs.session, { tag: gs.handUniqueId });</span>
+<span class="cstat-no" title="statement not covered" >      logger.log('debug', getPlayerStatusLogMessage(gs.players), { tag: gs.handUniqueId });</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return void logger.info('Hand %d/%d, betting session is finished.',</span>
+        gs.gameProgressiveId, gs.handProgressiveId, { tag: gs.handUniqueId });
+    }
+&nbsp;
+&nbsp;
+  }
+&nbsp;
+};
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @private
+ * @function
+ * @name getGameSession
+ * @desc
+ *  return the current game session
+ *
+ * @param {Number} commonCards
+ *  number of common cards
+ *
+ * @returns {GameSession}
+ */
+function <span class="fstat-no" title="function not covered" >getGameSession(</span>commonCards) {
+<span class="cstat-no" title="statement not covered" >  switch (commonCards) {</span>
+    case 0:
+<span class="cstat-no" title="statement not covered" >      return gameSession.pre;</span>
+    case 3:
+<span class="cstat-no" title="statement not covered" >      return gameSession.flop;</span>
+    case 4:
+<span class="cstat-no" title="statement not covered" >      return gameSession.turn;</span>
+    case 5:
+<span class="cstat-no" title="statement not covered" >      return gameSession.river;</span>
+  }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @private
+ * @function
+ * @name isBetRoundFinished
+ * @desc
+ *  return true when the current bet round is finished,
+ *  that is all the players have bet the required minimum amount
+ *  to stay active, or folded;
+ *  false otherwise
+ *
+ * @param {Array} activePlayers
+ *  list of the players who are active
+ *
+ * @param {Number} callAmount
+ *  the amount each player should have bet in order to stay active
+ *
+ * @returns {Boolean} true when the bet round is finished
+ */
+function <span class="fstat-no" title="function not covered" >isBetRoundFinished(</span>activePlayers, callAmount) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (activePlayers.length == 1) {</span>
+<span class="cstat-no" title="statement not covered" >    return true;</span>
+  }
+&nbsp;
+  const allin_ = <span class="cstat-no" title="statement not covered" >Symbol.for('is-all-in');</span>
+&nbsp;
+  // search for active players who are not all in,
+  // and still have bet less than the minimum amount to stay active
+<span class="cstat-no" title="statement not covered" >  return activePlayers.find(<span class="fstat-no" title="function not covered" >pl</span>ayer =&gt; <span class="cstat-no" title="statement not covered" >!player[allin_] &amp;&amp; player.chipsBet &lt; callAmount)</span> == null;</span>
+}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @private
+ * @function
+ * @name getPlayerStatusLogMessage
+ * @desc
+ *  return a log of the player' status, and bet
+ *
+ * @param {Array} players
+ *  list of the players
+ *
+ * @returns {String}
+ */
+function <span class="fstat-no" title="function not covered" >getPlayerStatusLogMessage(</span>players) {
+<span class="cstat-no" title="statement not covered" >  return players.reduce(<span class="fstat-no" title="function not covered" >fu</span>nction (msg, player) {</span>
+<span class="cstat-no" title="statement not covered" >    msg += player.status == playerStatus.out ?</span>
+      `${player.name} is out. ` : `${player.name} has bet ${player.chipsBet} (${player.status}). `;
+<span class="cstat-no" title="statement not covered" >    return msg;</span>
+  }, '').trim().slice(0, -1);
+}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * @private
+ * @function
+ * @name getCommonCardsLogMessage
+ * @desc
+ *  return a log of the community cards
+ *
+ * @param {Array} cards
+ *  list of the cards
+ *
+ * @returns {String}
+ */
+function <span class="fstat-no" title="function not covered" >getCommonCardsLogMessage(</span>cards) {
+<span class="cstat-no" title="statement not covered" >  return cards.reduce(<span class="fstat-no" title="function not covered" >fu</span>nction (msg, card) {</span>
+<span class="cstat-no" title="statement not covered" >    return msg += `${card.rank}${card.type}, `, msg;</span>
+  }, '').trim().slice(0, -1);
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 04 2017 17:44:45 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
