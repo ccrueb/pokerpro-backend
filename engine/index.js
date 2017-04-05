@@ -9,6 +9,8 @@ const EventEmitter = events.EventEmitter;
 const setup_ = Symbol('setup-tournament-method');
 const tournaments_ = Symbol('tournament-collection');
 
+
+
 const gamestate = Object.create(EventEmitter.prototype, {
 
   /**
