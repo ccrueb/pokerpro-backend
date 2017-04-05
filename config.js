@@ -6,6 +6,8 @@ const config = {
     // Number of players needed in queue to start game
     GAME_SIZE: 2,
 
+    MONGO_URI: 'mongodb://localhost/anthony'
+
 }
 
 
