@@ -1,36 +1,42 @@
+// Dependencies 
+var engine = require('../engine');
+var matchMaker = require('../match-maker');
+var express = require('express');
+var http = require('http');
+var bodyParser = require('body-parser');
 
-'use strict';
+// Set up Express server
+var app = express();
+var server = http.Server(app);
+var port = require('../config').PORT;
 
-const express = require('express');
-const http = require('http');
-const bodyParser = require('body-parser');
+// Define routes
+app.use(bodyParser.json());
 
-const app = express();
-const server = http.Server(app);
-const port = 9000;
+app.get('/game/:gameId/:playerId/:bet', function (req, res) {
+    engine.addRequest(req, res);
+});
 
-exports = module.exports = {
-    start: function (engine, matchMaker) {
-        app.use(bodyParser.json());
+app.get('/game/:gameId/:playerId', function (req, res) {
+    engine.addRequest(req, res);
+});
 
-        app.get('/game/:gameId/:playerId/:bet', function (req, res) {
-            engine.addRequest(req, res);
-        });
+app.get('/join/:playerId', function (req, res) {
+    matchMaker.addPlayer({ id: req.params.playerId, res: res });
+});
 
-        app.get('/game/:gameId/:playerId', function (req, res) {
-            engine.addRequest(req, res);
-        });
+app.get('/leave/:gameId/:playerId', function (req, res) {
+    //TODO remove player from game
+});
 
-        app.get('/join/:playerId', function (req, res) {
-            matchMaker.addPlayer({id: req.params.playerId, res: res});   
-        });
+// Exported (public) methods
+exports = module.exports = {};
+exports.listen = function () {
+    server.listen(port, function () {
+        console.log('Server listening on port', server.address().port);
+    });
+};
 
-        app.get('/leave/:gameId/:playerId' ,function (req, res) {
-            //TODO remove player from game
-        });
-
-        server.listen(port, function () {
-            console.log('Server listening on port', server.address().port);
-        });
-    }
+exports.close = function() {
+    // TODO
 }

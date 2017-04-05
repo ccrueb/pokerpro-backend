@@ -1,5 +1,6 @@
-function MatchMaker(engine) {
-    this.engine = engine;
+var engine = require('../engine');
+
+function MatchMaker() {
     //TODO Add two more queues for different ELOs
     this.queue = [];
     this.totalGames = 0;
@@ -32,11 +33,11 @@ MatchMaker.prototype.addPlayer = function (joinObj) {
         }
 
         //Start game
-        this.engine.start(this.totalGames.toString(), players);
+        engine.start(this.totalGames.toString(), players);
 
         //Empty Q, this is a bad idea for the future because new players may have joined
         this.queue = [];
     }
 }
 
-module.exports = MatchMaker;
+module.exports = new MatchMaker();
