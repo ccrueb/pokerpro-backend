@@ -4,7 +4,6 @@
 const config = require('../../config');
 
 const logger = require('../../storage/logger');
-const save = require('../../storage/storage').save;
 
 const request = require('request');
 const sortByRank = require('poker-rank');
@@ -141,8 +140,6 @@ const actions = {
 
     this[hasTalked_] = true;
     this[update_](gs, betAmount);
-
-    return save({ type: 'bet', handId: gs.handUniqueId, session: gs.session, playerId: this.id, amount: betAmount });
   },
 
 
@@ -162,7 +159,6 @@ const actions = {
     this.status = playerStatus.folded;
 
     logger.log('debug', '%s (%s) has folded.', this.name, this.id, { tag: gs.handUniqueId });
-    return save({ type: 'status', handId: gs.handUniqueId, session: gs.session, playerId: this.id, status: playerStatus.folded });
   },
 
 

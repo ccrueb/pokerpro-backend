@@ -4,7 +4,6 @@
 const playerStatus = require('./domain/player-status');
 
 const logger = require('../storage/logger');
-const save = require('../storage/storage').save;
 
 const showdown = require('./domain-utils/showdown');
 const assignPot = require('./domain-utils/assign-pot');
@@ -27,23 +26,14 @@ exports = module.exports = function* teardown(gs){
 
   logger.log('debug', getRankingLogMessage(gs.handChart), { tag: gs.handUniqueId });
 
-  yield save({ type: 'showdown', handId: gs.handUniqueId, players: gs.handChart });
-
-
-
   assignPot(gs);
 
   logger.log('debug', getWinsLogMessage(gs.winners), { tag: gs.handUniqueId });
-
-  yield save({ type: 'win', handId: gs.handUniqueId, winners: gs.winners });
-
-
 
   for (let i=0; i<activePlayers.length; i++){
     let player = activePlayers[i];
     if (player.chips === 0){
       logger.info('%s (%s) is out', player.name, player.id, { tag: gs.handUniqueId });
-      yield save({ type: 'status', handId: gs.handUniqueId, playerId: player.id, status: playerStatus.out });
     }
   }
 

@@ -4,7 +4,6 @@
 const config = require('../config');
 
 const logger = require('../storage/logger');
-const save = require('../storage/storage').save;
 
 const gameStatus = require('./domain/tournament-status');
 const playerStatus = require('./domain/player-status');
@@ -55,10 +54,6 @@ exports = module.exports = function* dealer(gs){
       const finalGameChart = gs.gameChart.map((playerName, i) => ({ name: playerName, pts: points[i] }));
 
       logger.info('Final ranks for game %d: %s', gs.gameProgressiveId, getRankingLogMessage(finalGameChart), { tag: gs.handUniqueId })
-
-      yield save({ type: 'points', tournamentId: gs.tournamentId, gameId: gs.gameProgressiveId, rank: finalGameChart });
-
-
 
       // restore players' initial conditions
       gs.players.forEach(player => { player.status = playerStatus.active; player.chips = config.BUYIN; });
@@ -113,9 +108,6 @@ exports = module.exports = function* dealer(gs){
       // blinds, ante, cards ...
 
       runSetupTasks(gs);
-
-      yield save({ type: 'setup', handId: gs.handUniqueId, pot: gs.pot, sb: gs.sb, ante: gs.ante || 0, players: gs.players });
-
 
       // play the game
       // each player will be asked to make a bet,

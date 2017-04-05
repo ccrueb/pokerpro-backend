@@ -4,8 +4,6 @@
 const config = require('../config');
 
 const logger = require('../storage/logger');
-const save = require('../storage/storage').save;
-
 
 const gameSession = require('./domain/game-session');
 const playerStatus = require('./domain/player-status');
@@ -133,11 +131,6 @@ exports = module.exports = function* betLoop(gs) {
 
       logger.log('debug', 'Hand %d/%d, common cards (%s) are %s',
         gs.gameProgressiveId, gs.handProgressiveId, gs.session, getCommonCardsLogMessage(gs.commonCards), { tag: gs.handUniqueId });
-
-      yield save({
-        type: 'cards', handId: gs.handUniqueId, session: gs.session,
-        commonCards: gs.session == gameSession.flop ? gs.commonCards : gs.commonCards.slice(-1)
-      });
 
     }
     else {
