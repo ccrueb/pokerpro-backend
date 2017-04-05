@@ -1,13 +1,11 @@
 var engine = require('../engine');
+var gameSize = require('../config').GAME_SIZE;
 
 function MatchMaker() {
     //TODO Add two more queues for different ELOs
     this.queue = [];
     this.totalGames = 0;
 }
-
-//TODO: Change this. It is a low # to make testing easier
-var gameSize = 2;
 
 MatchMaker.prototype.addPlayer = function (joinObj) {
 
