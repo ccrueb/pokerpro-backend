@@ -101,7 +101,10 @@ MatchMaker.prototype.startGame = function() {
     console.log("starting game");
     //Send responses with gameID
     for (var i = 0; i < this.queue.length; i++) {
-        this.queue[i].res.send(this.totalGames.toString() + "; " + this.players[i]);
+        this.queue[i].res.send({
+        	gameId: this.totalGames.toString(),
+        	playerInfo: this.players[i]
+        });
     }
 
     //Start game
