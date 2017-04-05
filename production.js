@@ -1,9 +1,7 @@
 'use strict';
 
 //Dependencies
-const engine = require('./engine');
 const server = require('./server');
-var MatchMaker = require('./match-maker');
 
 // const chalk = require('chalk');
 
@@ -16,8 +14,8 @@ var MatchMaker = require('./match-maker');
 
 
 
-//Start router
-server.start(engine, new MatchMaker(engine));
+//Start server
+server.listen();
 
 
 

@@ -1,8 +1,11 @@
+var engine = require('../engine');
+var gameSize = require('../config').GAME_SIZE;
+
 const mongoose = require('mongoose');
 const playerSchema = require('../schemas/player-schema');
-mongoUri = 'mongodb://localhost/anthony';
+mongoUri = requre('../config').MONGO_URI;
 
-function MatchMaker(engine) {
+function MatchMaker() {
     this.engine = engine;
     //TODO Add two more queues for different ELOs
     this.queue = [];
@@ -10,8 +13,6 @@ function MatchMaker(engine) {
     this.totalGames = 0;
 }
 
-//TODO: Change this. It is a low # to make testing easier
-var gameSize = 2;
 
 MatchMaker.prototype.addPlayer = function (joinObj) {
 
@@ -104,7 +105,7 @@ MatchMaker.prototype.startGame = function() {
     }
 
     //Start game
-    this.engine.start(this.totalGames.toString(), this.players);
+    engine.start(this.totalGames.toString(), this.players);
 
     //Empty Q, this is a bad idea for the future because new players may have joined
     this.queue = [];
@@ -114,4 +115,4 @@ MatchMaker.prototype.startGame = function() {
 
 }
 
-module.exports = MatchMaker;
+module.exports = new MatchMaker();
