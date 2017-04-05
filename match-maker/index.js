@@ -3,7 +3,7 @@ var gameSize = require('../config').GAME_SIZE;
 
 const mongoose = require('mongoose');
 const playerSchema = require('../schemas/player-schema');
-mongoUri = requre('../config').MONGO_URI;
+mongoUri = require('../config').MONGO_URI;
 
 function MatchMaker() {
     this.engine = engine;
