@@ -4,7 +4,8 @@ var gameSize = require('../config').GAME_SIZE;
 const mongoose = require('mongoose');
 const playerSchema = require('../schemas/player-schema');
 mongoUri = require('../config').MONGO_URI;
-
+var MongoDB = mongoose.connect(mongoUri).connection;
+        MongoDB.on('error', function(err) { console.log(err.message); });
 function MatchMaker() {
     this.engine = engine;
     //TODO Add two more queues for different ELOs
@@ -29,9 +30,8 @@ MatchMaker.prototype.addPlayer = function (joinObj) {
         this.totalGames += 1;
 
         //Build player objects - queried from db
-        var MongoDB = mongoose.connect(mongoUri).connection;
-        MongoDB.on('error', function(err) { console.log(err.message); });
-        MongoDB.once('open', this.findPlayers.bind(this));
+        
+        this.findPlayers();
     }
 }
 
@@ -49,7 +49,7 @@ MatchMaker.prototype.findPlayers = function (){
         console.log("finding player with id %s", this.queue[i].id);
         promises.push(Player.findOne({ 'id': this.queue[i].id }, this.handlePlayer.bind(this, i, Player)));
     }
-    Promise.all(promises).then(this.startGame.bind(this))
+    Promise.all(promises).then(this.startGame())
         .catch(function(error) {
             console.log(error);
             return;

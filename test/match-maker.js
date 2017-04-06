@@ -22,12 +22,13 @@ describe("Match Maker addPlayer function", function() {
       expect(mm.queue.length).to.equal(1);
     });
     it("one game should start", function() {
-      var startstub = sinon.stub(engine, "start");
+      var startstub = sinon.stub(mm, "startGame", function() {mm.queue = []});
       const player2 = { name: 'player2', id: 'p2'};
       mm.addPlayer(player2);
       expect(startstub.calledOnce);
     });
    it("should have total games 2", function() {
+     
       const player3 = { name: 'player3', id: 'p3'};
       const player4 = { name: 'player4', id: 'p4'};
       //mm.addPlayer(player1);
