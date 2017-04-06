@@ -37,7 +37,8 @@
   "nyc": {
     "exclude": [
       "config.js",
-      "engine/config.js"
+      "engine/config.js",
+      "test/**/*.js"
     ],
     "report-dir": "./docs/coverage-report"
   }
