@@ -1,9 +1,9 @@
-var mm = require('../match-maker');
+var addPlayer = require('../match-maker');
 var sinon = require('sinon')
 var engine = require('../engine')
 var expect = require("chai").expect;
 
-describe("Match Maker constructor", function() {
+describe("addPlayer", function() {
     it("should have an empty queue", function() {
       expect(mm.queue.length).to.equal(0);
     });

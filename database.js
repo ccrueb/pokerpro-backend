@@ -1,46 +1,53 @@
-const mongoose = require('mongoose');
-const playerSchema = require('./schemas/player-schema');
-mongoUri = require('./config').MONGO_URI;
-var MongoDB = mongoose.connect(mongoUri).connection;
-MongoDB.on('error', function(err) { console.log(err.message); });
-
-var database = {};
+var mongoose = require('mongoose');
+var playerSchema = require('./schemas/player-schema');
+var logger = require('./engine/storage/logger');
 var Player = mongoose.model('player', playerSchema);
-database.findPlayer = function(obj, callback) {
-    console.log('looking for' + obj.id)
+
+// Exported object
+var database = {};
+
+//Finds a player based on ID - used by MatchMaker
+database.findPlayerByID = function (id, callback) {
     
-    Player.findOne({ 'id': obj.id }, function(err, player){
-        if(player === null) {
-            player = createPlayer(obj.id);
-            
-        } 
-        player.res = obj.res;
-        callback(err, player);
-        
+    logger.info('Search for player ' + id);
+    
+    Player.findOne({ 'id': id }, function (err, player) {
+        if(err) {
+            logger.error(err);
+            return;
+        }
+        if (player === null) {
+            logger.info('Player ' + id + ' does not exist.');
+            callback(new Error('No player found'), null);
+
+        } else {
+           logger.info('Player ' + id + ' found.');
+           callback(err, player);
+        }
     });
 };
 
-function createPlayer(id) {
+//Creates a new player
+database.createPlayer = function(id) {
     var player = new Player({
-            id: id,
-            name: "xXP0k3RsLaY3rXx",
-            elo: 600,
-            handsWon: 0,
-            handsLost: 0,
-            chipsWon: 0,
-            chipsLost: 0
-        });
+        id: id,
+        name: "xXP0k3RsLaY3rXx",
+        elo: 600,
+        handsWon: 0,
+        handsLost: 0,
+        chipsWon: 0,
+        chipsLost: 0
+    });
 
-        player.save(function(err,player){
-            if (err) {
-                console.log("error in creating player: " + err);
-                return;
-            }
-            console.log("successfully created player");
-        });
+    player.save(function (err, player) {
+        if (err) {
+            logger.error("error in creating player: " + err);
+            return;
+        }
+        logger.info("successfully created player " + id);
+    });
 
     return player;
-}
-
+};
 
 module.exports = database;
