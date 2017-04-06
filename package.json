@@ -50,5 +50,8 @@
     "nyc": "^10.2.0",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0"
+  },
+  "nyc": {
+    "report-dir": "./docs/coverage-report"
   }
 }
