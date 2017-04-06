@@ -11,8 +11,7 @@ const playerStatus = require('./domain/player-status');
 const shouldBet = require('./domain-utils/should-bet');
 const shouldBreak = require('./domain-utils/should-break');
 
-var requestQueue = require('./domain-utils/request-queue');
-
+var sendResponses = require('./domain-utils/request-queue');
 
 const asyncFrom = require('./lib/loop-from-async');
 
@@ -77,7 +76,7 @@ exports = module.exports = function* betLoop(gs) {
             gs.currentPlayer = player.id;
 
             //Send gamestate
-            requestQueue.sendResponses(gs);
+            sendResponses(gs);
 
             return player.talk(gs, player.id)
               .then(function (x) {

@@ -1,8 +1,6 @@
 //Hashes a requests from players. Player: key, request: value
 
-exports = module.exports = {
-
-  sendResponses: function(gs) {
+exports = module.exports = function sendResponses(gs) {
       
       gs.players.forEach(function(p) {
           if(gs.requests.get(p.id) != null) {
@@ -10,5 +8,5 @@ exports = module.exports = {
             gs.requests.set(p.id, null);
           }     
       }, this);
-  }
+      
 };

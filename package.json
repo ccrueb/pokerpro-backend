@@ -1,37 +1,20 @@
 {
-  "name": "poker-holdem-engine",
-  "version": "2.0.4",
+  "name": "PokerPro",
+  "version": "0.0.1",
   "description": "Texas hold'em poker engine",
-  "main": "index.js",
+  "main": "production.js",
   "engines": {
     "node": "6.0.0"
   },
-  "browser": {
-    "winston": false
-  },
   "scripts": {
-    "demo": "node demo",
     "test": "nyc --reporter=html --reporter=text mocha --recursive"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/brunoscopelliti/poker-holdem-engine.git"
-  },
-  "keywords": [
-    "poker",
-    "texas",
-    "hold'em",
-    "poker",
-    "engine",
-    "poker",
-    "game"
-  ],
-  "author": "Bruno Scopelliti",
+    "url": "https://github.com/ccrueb/pokerpro-backend.git"
+  }, 
+  "author": "PokerPro team",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/brunoscopelliti/poker-holdem-engine/issues"
-  },
-  "homepage": "https://github.com/brunoscopelliti/poker-holdem-engine",
   "dependencies": {
     "chalk": "1.1.3",
     "knuth-shuffle": "1.0.1",
@@ -50,5 +33,13 @@
     "nyc": "^10.2.0",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0"
+  },
+  "nyc": {
+    "exclude": [
+      "config.js",
+      "engine/config.js",
+      "test/**/*.js"
+    ],
+    "report-dir": "./docs/coverage-report"
   }
 }
