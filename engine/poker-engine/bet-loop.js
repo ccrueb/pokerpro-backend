@@ -228,7 +228,7 @@ function isBetRoundFinished(activePlayers, callAmount) {
 function getPlayerStatusLogMessage(players) {
   return players.reduce(function (msg, player) {
     msg += player.status == playerStatus.out ?
-      `${player.name} is out. ` : `${player.name} has bet ${player.chipsBet} (${player.status}). `;
+      `${player.name} is out. ` : `${player.id} has bet ${player.chipsBet} (${player.status}). `;
     return msg;
   }, '').trim().slice(0, -1);
 }
