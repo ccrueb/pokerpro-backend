@@ -93,58 +93,11 @@ const gamestate = Object.create(EventEmitter.prototype, {
           logger.error('An error occurred during tournament %s.', gs.tournamentId, errorTag);
           logger.error('Error: %s.\nStacktrace: %s', err.message, err.stack, errorTag);
         });
-      }, 1000)
+      }, 1000);
       
     }
   },
 
-
-  /**
-   * @function
-   * @name start
-   * @desc it makes a new tournament start, or resume a paused tournament
-   *
-   * @param {string} tournamentId:
-   *  unique identifier for the current tournament
-   * @param {Array} players:
-   *  list of the player who play the current tournament;
-   *  each player is an object with at least the following properties:
-   *  - player.id
-   *  - player.name
-   *  - player.serviceUrl
-   * @param {Number} gameId:
-   *  specify from which game the tournament should start;
-   *  it's different from 1 when the tournament is recovered after a crash.
-   *
-   * @returns void
-   */
-  start: {
-    value: function(tournamentId, players, gameId = 1){
-
-      // start has a different meaning on the basis of the fact
-      // that the tournament is starting for the first time, or
-      // it is resuming after a break.
-
-
-      const gs = this[tournaments_].get(tournamentId);
-
-      // a)
-      // in case the tournament is starting for the first time
-      // we've to setup the tournament.
-
-      if (gs == null)
-        return void this[setup_](tournamentId, players, gameId);
-
-      // b)
-      // in case the tournament has already started, and it'snt
-      // currently running, we just have to activate it.
-
-      if (gs.tournamentStatus != tournamentStatus.pause)
-        return;
-
-      gs.tournamentStatus = tournamentStatus.play;
-    }
-  },
 
 
   /**
@@ -237,6 +190,32 @@ const gamestate = Object.create(EventEmitter.prototype, {
 // gamestate[tournaments_] contains the game information
 // about the various tournaments
 gamestate[tournaments_] = new Map();
+
+gamestate.start = function(tournamentId, players, gameId = 1){
+
+      // start has a different meaning on the basis of the fact
+      // that the tournament is starting for the first time, or
+      // it is resuming after a break.
+
+
+      const gs = this[tournaments_].get(tournamentId);
+
+      // a)
+      // in case the tournament is starting for the first time
+      // we've to setup the tournament.
+
+      if (gs == null)
+        return void this[setup_](tournamentId, players, gameId);
+
+      // b)
+      // in case the tournament has already started, and it'snt
+      // currently running, we just have to activate it.
+
+      if (gs.tournamentStatus != tournamentStatus.pause)
+        return;
+
+      gs.tournamentStatus = tournamentStatus.play;
+}
 
 exports = module.exports = gamestate;
 

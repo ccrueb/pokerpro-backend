@@ -2,7 +2,7 @@
 'use strict';
 
 const config = require('../../config');
-
+const save = require('../../storage/storage').save;
 const logger = require('../../storage/logger');
 
 const request = require('request');
@@ -13,12 +13,6 @@ const getCombinations = require('poker-combinations');
 const playerStatus = require('../domain/player-status');
 
 const splitPot = require('./split-pot');
-
-
-
-
-
-const update_ = Symbol('internal-update-method');
 
 const actions = {
 
@@ -36,7 +30,7 @@ const actions = {
    *
    * @returns {void}
    */
-  [update_](gs, betAmount) {
+  update(gs, betAmount) {
 
     const isAllin_ = Symbol.for('is-all-in');
 
@@ -139,7 +133,7 @@ const actions = {
     logger.log('debug', '%s (%s) has bet %d.', this.name, this.id, betAmount, { tag: gs.handUniqueId });
 
     this[hasTalked_] = true;
-    this[update_](gs, betAmount);
+    this.update(gs, betAmount);
   },
 
 
@@ -159,6 +153,7 @@ const actions = {
     this.status = playerStatus.folded;
 
     logger.log('debug', '%s (%s) has folded.', this.name, this.id, { tag: gs.handUniqueId });
+    return save({ type: 'status', handId: gs.handUniqueId, session: gs.session, playerId: this.id, status: playerStatus.folded });
   },
 
 
@@ -177,7 +172,7 @@ const actions = {
    * @returns {void}
    */
   pay(gs, amount) {
-    this[update_](gs, Math.min(this.chips, amount));
+    this.update(gs, Math.min(this.chips, amount));
   },
 
 
