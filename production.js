@@ -1,7 +1,11 @@
 'use strict';
 
 //Dependencies
-const server = require('./server');
+var server = require('./server');
+var port = require('./config').PORT;
+var logger = require('./engine/storage/logger');
 
-//Start server
-server.listen();
+
+server.listen(port, function () {
+    logger.info('Server listening on port', port);
+});
