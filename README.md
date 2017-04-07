@@ -17,7 +17,7 @@ node production.js
 This will spin up an HTTP server on localhost listening to port 9000. Through the browser one can interact with the engine using the endpoint specified in the **server** module.
 To run tests, from the root of the project
 ```
-npm tests
+npm test
 ```
 This will run all of the Mocha tests that are written in the **test** directory. Also an istanbul code-coverage report will be produced. To view that open the **index.html** file found in **docs/coverage-report**.
 
