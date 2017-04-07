@@ -1,6 +1,25 @@
 # pokerpro-backend
 The Node.js application which powers Poker Pro
 
+# Build and run
+The following instructions show how to get up and running with our project:
+
+To clone and install enter the following commands in the terminal
+```git clone https://github.com/ccrueb/pokerpro-backend.git
+cd pokerpro-backend
+npm install
+```
+To run the application, from the root of the project directory
+```
+node production.js
+```
+This will spin up an HTTP server on localhost listening to port 9000. Through the browser one can interact with the engine using the endpoint specified in the **server** module.
+To run tests, from the root of the project
+```
+npm tests
+```
+This will run all of the Mocha tests that are written in the **test** directory. Also an istanbul code-coverage report will be produced. To view that open the **index.html** file found in **docs/coverage-report**.
+
 # server info
 The server is hosted on Digital Ocean. Cal has the login info to access the digital ocean dashboard.
 The server was configured using the following [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04). 
