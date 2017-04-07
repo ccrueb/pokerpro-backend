@@ -129,18 +129,16 @@ describe('Player factory', function () {
   var player = funct({ name: 'arale', id: 'a1'});
 
   engine.once('gamestate:updated', function(data){
-    expect(player.status).to.equal();
-    expect(data.type).to.equal();
-    expect(data.playerId).to.equal();
-    expect(data.status).to.equal();
-
+    expect(player.status).to.equal('folded');
+    expect(data.type).to.equal('status');
+    expect(data.playerId).to.equal('a1');
+    expect(data.status).to.equal('folded');
     done();
   });
 
   player.fold(gamestate);
 
      });
-
 
     });
 

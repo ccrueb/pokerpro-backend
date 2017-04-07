@@ -22,13 +22,25 @@ describe("Match maker", function() {
       mm.addPlayer({name: 'Cal', res: 2});
 
       expect(dbStub.calledOnce);
+      dbStub.restore();
     });
     
+    
+
     it("should start the game when second player joins", function() {
       var startstub = sinon.stub(mm, "startGame").callsFake(function() {mm.totalGames++,mm.queue = []}); 
       const player2 = { name: 'player2', id: 'p2'};
       mm.addPlayer(player2);
       expect(startstub.calledOnce);
+    });
+
+    it("should create new player if none found", function() {
+      var dbStub = sinon.stub(db, 'findPlayerByID').callsFake(function(obj,cb) {cb(null, null)});
+      var createStub = sinon.stub(db, 'createPlayer').callsFake(function(obj,cb) {return {}});
+
+      mm.addPlayer({name: 'Cal', res: 2});
+
+      expect(dbStub.calledOnce);
     });
    
    it("should have two games", function() {
@@ -39,6 +51,21 @@ describe("Match maker", function() {
       mm.addPlayer(player3);
       mm.addPlayer(player4);
       expect(mm.totalGames).to.equal(2);
+    });
+});
+
+describe("Match maker startGame function", function() {
+    it("should clear queue", function() {
+      
+      mm.startGame();
+
+      expect(mm.queue.length).to.equal(0);
+    });
+    it("should increment total games", function() {
+      var initalValue = mm.totalGames;
+      mm.startGame();
+      
+      expect(mm.totalGames).to.be.above(initalValue);
     });
 });
 });
