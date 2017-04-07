@@ -5,7 +5,8 @@ The Node.js application which powers Poker Pro
 The following instructions show how to get up and running with our project:
 
 To clone and install enter the following commands in the terminal
-```git clone https://github.com/ccrueb/pokerpro-backend.git
+```
+git clone https://github.com/ccrueb/pokerpro-backend.git
 cd pokerpro-backend
 npm install
 ```
