@@ -4,6 +4,8 @@ var sinon = require('sinon')
 var engine = require('../engine')
 var expect = require("chai").expect;
 
+var startstub;
+
 describe("Match maker", function() {
     
     it("should have an empty queue", function() {
@@ -28,10 +30,11 @@ describe("Match maker", function() {
     
 
     it("should start the game when second player joins", function() {
-      var startstub = sinon.stub(mm, "startGame").callsFake(function() {mm.totalGames++,mm.queue = []}); 
+      startstub = sinon.stub(mm, "startGame").callsFake(function() {mm.totalGames++,mm.queue = []}); 
       const player2 = { name: 'player2', id: 'p2'};
       mm.addPlayer(player2);
       expect(startstub.calledOnce);
+      
     });
 
     it("should create new player if none found", function() {
@@ -54,20 +57,6 @@ describe("Match maker", function() {
     });
 });
 
-describe("Match maker startGame function", function() {
-    it("should clear queue", function() {
-      
-      mm.startGame();
-
-      expect(mm.queue.length).to.equal(0);
-    });
-    it("should increment total games", function() {
-      var initalValue = mm.totalGames;
-      mm.startGame();
-      
-      expect(mm.totalGames).to.be.above(initalValue);
-    });
-});
 });
 
 
