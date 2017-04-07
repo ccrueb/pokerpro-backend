@@ -4,12 +4,14 @@ var database = require('../database');
 
 
 //TODO Add two more queues for different ELOs
-var queue = [];
-var totalGames = 0;
+var matchMaker = {
+    queue: [],
+    totalGames: 0
+};
 
-var addPlayer = function (joinObj) {
+matchMaker.addPlayer = function (joinObj) {
 
-    //TODO check players elo to put them into the correct queue
+    //TODO check players elo to put them into the correct matchMaker.queue
     database.findPlayerByID(joinObj.id, function (err, player) {
         
         if(player === null) {
@@ -17,10 +19,10 @@ var addPlayer = function (joinObj) {
         }
 
         player.res = joinObj.res;
-        queue.push(player);
+        matchMaker.queue.push(player);
 
-        if (queue.length >= gameSize) {
-            startGame();
+        if (matchMaker.queue.length >= gameSize) {
+            matchMaker.startGame();
         }
     });
 };
@@ -28,24 +30,24 @@ var addPlayer = function (joinObj) {
 /**
  * Starts the game using the players list
  */
-function startGame() {
+matchMaker.startGame = function() {
     //Send responses with gameID
     var players = [];
     for (var i = 0; i < gameSize; i++) {
-        players.push(queue[i]);
-        queue[i].res.send({
-            gameId: totalGames.toString(),
+        players.push(matchMaker.queue[i]);
+        matchMaker.queue[i].res.send({
+            gameId: matchMaker.totalGames.toString(),
             playerInfo: players[i]
         });
     }
      
     //Start game
-    totalGames++;
-    engine.start(totalGames.toString(), players);
+    matchMaker.totalGames++;
+    engine.start(matchMaker.totalGames.toString(), players);
 
     //Empty Q, this is a bad idea for the future because new players may have joined by now
-    queue = [];
+    matchMaker.queue = [];
 
 }
 
-module.exports = addPlayer;
+module.exports = matchMaker;
