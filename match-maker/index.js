@@ -1,6 +1,7 @@
 var engine = require('../engine');
 var gameSize = require('../config').GAME_SIZE;
 var database = require('../database');
+var logger = require('../engine/storage/logger');
 
 
 //TODO Add two more queues for different ELOs
@@ -11,11 +12,15 @@ var matchMaker = {
 
 matchMaker.addPlayer = function (joinObj) {
 
+    logger.info("adding player...");
+
     //TODO check players elo to put them into the correct matchMaker.queue
     database.findPlayerByID(joinObj.id, function (err, player) {
         
-        if(player === null) {
-            player = database.createPlayer(joinObj.id);
+        if(err) {
+            logger.error(err);
+            joinObj.res.send(err.toString());
+            return;
         }
 
         player.res = joinObj.res;
@@ -48,6 +53,6 @@ matchMaker.startGame = function() {
     //Empty Q, this is a bad idea for the future because new players may have joined by now
     matchMaker.queue = [];
 
-}
+};
 
 module.exports = matchMaker;

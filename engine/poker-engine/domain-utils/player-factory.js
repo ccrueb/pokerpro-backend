@@ -458,7 +458,7 @@ exports = module.exports = function factory(obj) {
 
   const player = Object.create(actions);
 
-  ['id', 'name']
+  ['id', 'name', 'elo']
     .forEach(prop => Object.defineProperty(player, prop, { value: obj[prop] }))
 
   // status of the player

@@ -13,14 +13,13 @@ database.findPlayerByID = function (id, callback) {
     
     Player.findOne({ 'id': id }, function (err, player) {
         if(err) {
-            logger.error(err);
-            return;
+            callback(err, null);
         }
-        if (player === null) {
-            logger.info('Player ' + id + ' does not exist.');
+        else if (player === null) {
             callback(new Error('No player found'), null);
 
-        } else {
+        } 
+        else {
            logger.info('Player ' + id + ' found.');
            callback(err, player);
         }
@@ -28,11 +27,13 @@ database.findPlayerByID = function (id, callback) {
 };
 
 //Creates a new player
-database.createPlayer = function(id) {
+database.createPlayer = function(playerObj) {
+	logger.info("creating player...");
     var player = new Player({
-        id: id,
-        name: "xXP0k3RsLaY3rXx",
+        id: playerObj.id,
+        name: playerObj.name,
         elo: 600,
+        avatarId: 0,
         handsWon: 0,
         handsLost: 0,
         chipsWon: 0,
@@ -42,12 +43,30 @@ database.createPlayer = function(id) {
     player.save(function (err, player) {
         if (err) {
             logger.error("error in creating player: " + err);
+            playerObj.res.send(err);
             return;
         }
-        logger.info("successfully created player " + id);
+        logger.info("successfully created player " + playerObj.id);
+        playerObj.res.send(player);
     });
+};
 
-    return player;
+//changes player's avatar
+database.changeAvatar = function(playerId, avatarId, callback){
+	logger.info("changing avatar...");
+	Player.findOneAndUpdate({ id : playerId }, { avatarId: avatarId }, { new: true }, function(err, player){
+		if(err) {
+            callback(err, null);
+        }
+        else if (player === null) {
+            callback(new Error('No player found'), null);
+
+        }
+        else {
+           logger.info('Updated avatarId');
+           callback(err, player);
+        }
+	});
 };
 
 module.exports = database;
