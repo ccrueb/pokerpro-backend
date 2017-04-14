@@ -6,10 +6,23 @@ var logger = require('../engine/storage/logger');
 var app = require('express')();
 
 // Define routes
+/**
+ * place bet
+ * @param  {number}} gameId: id of game in which player is betting
+ * @param  {number} playerId: id of player that's betting
+ * @param {number} bet: amount player is betting
+ * @return {object}      gamestate object
+ */
 app.get('/game/:gameId/:playerId/:bet', function (req, res) {
     engine.addRequest(req, res);
 });
 
+/**
+ * get game object 
+ * @param  {number} gameId: id of game we want game object of 
+ * @param  {number} playerId: id of player that's in this game
+ * @return {object}      gamestate object
+ */
 app.get('/game/:gameId/:playerId', function (req, res) {
     engine.addRequest(req, res);
 });
@@ -27,7 +40,7 @@ app.get('/join/:playerId', function (req, res) {
  * register a new player in the database
  * @param {number} playerId		 facebook id of player
  * @param {string} playerName    username of player
- * @return {[type]}              returns player object
+ * @return {object}              returns player object
  */
 app.get('/register/:playerId/:playerName', function (req, res) {
 	database.createPlayer({id: req.params.playerId, name: req.params.playerName, res: res});
@@ -35,8 +48,8 @@ app.get('/register/:playerId/:playerName', function (req, res) {
 
 /**
  * return player object in database
- * @param  {number} playerId  id of player
- * @return {object}      		player object corresponding to id
+ * @param  {number} playerId:  id of player
+ * @return {object}   player object corresponding to id
  */
 app.get('/playerStats/:playerId', function (req, res) {
 	database.findPlayerByID(req.params.playerId, function(err, player){
@@ -50,13 +63,13 @@ app.get('/playerStats/:playerId', function (req, res) {
 });
 
 /**
- * update avatarId of player
- * @param  {number} playerId   id of player we want to update
- * @param {number}  avatarId   new avatarId we want to set
- * @return {object}            player object
+ * update stat of a player
+ * @param  {number} playerId: id of player we want to update
+ * @param {number}  avatarId: new avatarId we want to set
+ * @return {object} player object
  */
-app.get('/changeAvatar/:playerId/:avatarId', function (req, res){
-	database.changeAvatar(req.params.playerId, req.params.avatarId, function(err, player){
+app.get('/changeStat/:playerId/:statName/:statValue', function (req, res){
+	database.changeStat(req.params.playerId, req.params.statName, req.params.statValue, function(err, player){
 		if(err){
 			logger.error(err);
 			res.send(err.toString());

@@ -3,6 +3,7 @@
 exports = module.exports = function sendResponses(gs) {
       
       gs.players.forEach(function(p) {
+      	  console.log("handling player request " + p.id + ": " + gs.requests.get(p.id));
           if(gs.requests.get(p.id) != null) {
             gs.requests.get(p.id).res.status(200).send(p.getGs(gs));
             gs.requests.set(p.id, null);

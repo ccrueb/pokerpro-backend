@@ -52,9 +52,13 @@ database.createPlayer = function(playerObj) {
 };
 
 //changes player's avatar
-database.changeAvatar = function(playerId, avatarId, callback){
-	logger.info("changing avatar...");
-	Player.findOneAndUpdate({ id : playerId }, { avatarId: avatarId }, { new: true }, function(err, player){
+database.changeStat = function(playerId, statName, statValue, callback){
+	logger.info("changing stat <" + statName + "> to " + statValue);
+
+	var updateJson = {};
+	updateJson[statName] = statValue;
+
+	Player.findOneAndUpdate({ 'id' : playerId }, updateJson, { new: true }, function(err, player){
 		if(err) {
             callback(err, null);
         }
@@ -63,7 +67,7 @@ database.changeAvatar = function(playerId, avatarId, callback){
 
         }
         else {
-           logger.info('Updated avatarId');
+           logger.info('Updated stat successfully');
            callback(err, player);
         }
 	});

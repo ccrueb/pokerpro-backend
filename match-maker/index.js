@@ -36,6 +36,9 @@ matchMaker.addPlayer = function (joinObj) {
  * Starts the game using the players list
  */
 matchMaker.startGame = function() {
+    // increment total games
+    matchMaker.totalGames++;
+
     //Send responses with gameID
     var players = [];
     for (var i = 0; i < gameSize; i++) {
@@ -47,7 +50,6 @@ matchMaker.startGame = function() {
     }
      
     //Start game
-    matchMaker.totalGames++;
     engine.start(matchMaker.totalGames.toString(), players);
 
     //Empty Q, this is a bad idea for the future because new players may have joined by now
