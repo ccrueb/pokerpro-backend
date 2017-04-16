@@ -69,10 +69,6 @@ exports = module.exports = function* dealer(gs){
 
     if (gs.tournamentStatus == gameStatus.play || gs.tournamentStatus == gameStatus.latest){
 
-      if (config.HANDWAIT){
-        yield sleep(config.HANDWAIT);
-      }
-
       // setup the hand:
       // restore the initial condition for a new hand, pot,
       // blinds, ante, cards ...
