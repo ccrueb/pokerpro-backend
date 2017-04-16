@@ -29,26 +29,38 @@ database.findPlayerByID = function (id, callback) {
 //Creates a new player
 database.createPlayer = function(playerObj) {
 	logger.info("creating player...");
-    var player = new Player({
-        id: playerObj.id,
-        name: playerObj.name,
-        elo: 600,
-        avatarId: 0,
-        handsWon: 0,
-        handsLost: 0,
-        chipsWon: 0,
-        chipsLost: 0
-    });
 
-    player.save(function (err, player) {
-        if (err) {
-            logger.error("error in creating player: " + err);
-            playerObj.res.send(err);
-            return;
-        }
-        logger.info("successfully created player " + playerObj.id);
-        playerObj.res.send(player);
-    });
+	Player.findOne({ 'id': playerObj.id }, function(err, player){
+		if(err){
+			logger.err(err);
+			playerObj.res.send(err.toString());
+		} else if (player !== null) {
+			logger.info("player already exists");
+			playerObj.res.send("player already exists");
+		} else {
+		    player = new Player({
+		        id: playerObj.id,
+		        name: playerObj.name,
+		        elo: 600,
+		        avatarId: 0,
+		        handsWon: 0,
+		        handsLost: 0,
+		        chipsWon: 0,
+		        chipsLost: 0
+		    });
+
+		    player.save(function (err, player) {
+		        if (err) {
+		            logger.error("error in creating player: " + err);
+		            playerObj.res.send(err);
+		            return;
+		        }
+		        logger.info("successfully created player " + playerObj.id);
+		        playerObj.res.send(player);
+		    });
+		}
+	});
+	
 };
 
 //changes player's avatar
