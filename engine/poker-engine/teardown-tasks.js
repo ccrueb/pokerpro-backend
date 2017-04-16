@@ -23,7 +23,7 @@ exports = module.exports = function* teardown(gs){
 
 
   showdown(gs);
-
+  
   logger.log('debug', getRankingLogMessage(gs.handChart), { tag: gs.handUniqueId });
 
   assignPot(gs);

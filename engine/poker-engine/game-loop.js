@@ -38,44 +38,14 @@ exports = module.exports = function* dealer(gs){
     const foldedPlayers = gs.players.filter(player => player.status == playerStatus.folded);
 
 
-    // when before a new hand starts,
-    // there is only one active player
-    // the current game is finished.
-
+    //Game is over
     if (activePlayers.length + foldedPlayers.length === 1){
 
-      // each player takes points
-      // on the basis of their rank...
-      // then eventually a new game starts.
 
-      const playerCount = gs.gameChart.unshift(activePlayers[0].name);
-      const points = config.AWARDS[playerCount-2];
+      logger.info('Game %d has ended.', gs.tournamentId);
 
-      const finalGameChart = gs.gameChart.map((playerName, i) => ({ name: playerName, pts: points[i] }));
-
-      logger.info('Final ranks for game %d: %s', gs.gameProgressiveId, getRankingLogMessage(finalGameChart), { tag: gs.handUniqueId })
-
-      // restore players' initial conditions
-      gs.players.forEach(player => { player.status = playerStatus.active; player.chips = config.BUYIN; });
-      gs.gameChart = null;
-
-      if (gs.tournamentStatus == gameStatus.latest || gs.gameProgressiveId == config.MAX_GAMES){
-        gs.tournamentStatus = gameStatus.stop;
-        continue;
-      }
-
-
-
-      // warm up
-      if (config.WARMUP){
-        if (gs.gameProgressiveId <= config.WARMUP.GAME){
-          yield sleep(config.WARMUP.WAIT);
-        }
-      }
-
-      // start a new game
-      gs.handProgressiveId = 1;
-      gs.gameProgressiveId++;
+      gs.tournamentStatus = gameStatus.stop;
+      continue;
     }
 
 
@@ -133,24 +103,3 @@ exports = module.exports = function* dealer(gs){
   }
 
 };
-
-
-
-
-/**
- * @private
- * @function
- * @name getRankingLogMessage
- * @desc
- *  return a log of the final rankings
- *
- * @param {Array} players
- *  sorted list of the players, and points
- *
- * @returns {String}
- */
-function getRankingLogMessage(ranking){
-  return ranking.reduce(function(msg, player) {
-    return msg += `${player.name}: ${player.pts}, `, msg;
-  }, '').trim().slice(0,-1);
-}
