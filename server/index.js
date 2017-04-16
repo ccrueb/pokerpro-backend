@@ -27,6 +27,10 @@ app.get('/game/:gameId/:playerId', function (req, res) {
     engine.addRequest(req, res);
 });
 
+app.get('/fastgame/:gameId/:playerId', function (req, res) {
+    engine.instantGS(req,res);
+});
+
 /**
  * player joins matchmaking queue
  * @param  {number} playerId  id of player that wants to join

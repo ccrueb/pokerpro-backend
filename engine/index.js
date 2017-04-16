@@ -77,14 +77,15 @@ const gamestate = Object.create(EventEmitter.prototype, {
 
       logger.log('debug', 'Tournament players are: %s', gs.players.map(p => p.name).toString().replace(/,/g, ', '), { tag: gs.handUniqueId });
 
-
+      
       // start the game - this makes it so the game doesn't start for one second so clients have time to send request and get initial game state.
+      var that = this;
       setTimeout(function () {
         run(gameloop, gs)
         .then(function() {
           logger.info('Tournament %s is just finished.', tournamentId, { tag: gs.handUniqueId });
-          this[tournaments_].delete(tournamentId);
-          return this.emit('tournament:completed', { tournamentId: tournamentId });
+          that[tournaments_].delete(tournamentId);
+          return that.emit('tournament:completed', { tournamentId: tournamentId });
         }.bind(this))
         .catch(function(err) {
           // an error occurred during the gameloop generator execution;
@@ -180,6 +181,43 @@ const gamestate = Object.create(EventEmitter.prototype, {
       logger.info("piping info to gamestate");
       gs.requests.set(req.params.playerId, {req: req, res: res});
 
+      }      
+    }
+  },
+
+    /**
+   * @function
+   * @name addRequest
+   * @desc sends request 
+   *
+   * @param {string} tournamentId:
+   *  unique identifier for the current tournament
+   * @param {Number} playerId:
+   *  id of the player sending the req
+   *
+   * @returns void
+   */
+  instantGS: {
+    value: function(req, res){
+
+      const gs = this[tournaments_].get(req.params.gameId);
+
+      if (gs === undefined) {
+        
+        //No game found at this id
+        res.send("no game found");
+      } else {
+
+        var player;
+
+        for(var i = 0; i < gs.players.length; i++) {
+          if(gs.players[i].id == req.params.playerId) {
+            res.status(200).send(gs.players[i].getGs(gs));
+            return;
+          }
+        }
+
+        res.status(200).send('player not found');
       }      
     }
   },
