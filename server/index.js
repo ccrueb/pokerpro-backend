@@ -69,7 +69,8 @@ app.get('/playerStats/:playerId', function (req, res) {
 /**
  * update stat of a player
  * @param  {number} playerId: id of player we want to update
- * @param {number}  avatarId: new avatarId we want to set
+ * @param { string} statName: name of stat we want to update
+ * @param {number}  statValue: new value we want to set
  * @return {object} player object
  */
 app.get('/changeStat/:playerId/:statName/:statValue', function (req, res){
