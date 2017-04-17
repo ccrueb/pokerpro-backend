@@ -69,7 +69,7 @@ const actions = {
    * @returns {Promise} a promise resolved when bet data is stored
    */
   payBet(gs, betAmount) {
-    
+
 
     // normalize betAmount to the maximum value the player can pay
     betAmount = Math.min(this.chips, betAmount);
@@ -249,15 +249,23 @@ const actions = {
     // index of the player 'this' in the players array
     state.me = gs.players.findIndex(player => player.id == this.id);
 
-    //TODO: Updated move timeout to 30 seconds. This should be moved to a global config variable -CAL
-    const requestSettings = { body: state, json: true, followAllRedirects: true, maxRedirects: 1, timeout: 10 * 60 * 1000 };
-
+    
     return new Promise((resolve, reject) => {
 
+
+
       //Check requestQ for a request with a bet parameter from player with current move
-      var interval = setInterval(function () {
+      var interval = setInterval(() => {
+
+        //Player should fold if they are out but still in bet loop.
+        if (this.status == playerStatus.out) {
+          
+          resolve(0);
+        }
         if (gs.requests.get(id) && gs.requests.get(id).req.params && gs.requests.get(id).req.params.bet) {
           console.log("RECIEVED A BET");
+          //Reset missed moves counter
+          this.missedMoves = 0;
           //Clear timer and interval
           clearInterval(interval);
           clearTimeout(timer);
@@ -267,15 +275,22 @@ const actions = {
       }, 100);
 
       //If no move recieved in 15 seconds send 0
-      var timer = setTimeout(function () {
-        logger.log('debug', '%d ran out of time', id);
+      var timer = setTimeout( () => {
+        logger.log('debug', 'Player %d ran out of time.', id);
         //Clear timer and interval
         clearInterval(interval);
         clearTimeout(timer);
-
+        //Increment missed moves
+        this.missedMoves++;
+        console.log(this.missedMoves);
+ 
+        if (this.missedMoves > config.ALLOWED_MISSED_HANDS) {
+          logger.log('debug', '%d has missed %d hands and has been removed form the game.', id, config.ALLOWED_MISSED_HANDS);
+          this.status = playerStatus.out;
+        }
         resolve(0);
 
-      }, 10 * 60 * 1000);
+      }, config.HANDWAIT);
     });
 
   },
@@ -476,6 +491,8 @@ exports = module.exports = function factory(obj) {
   // in each "betting session" of the current hand.
   player.chipsBet = 0;
 
+  //Tracks how many moves the play has timed out of 
+  player.missedMoves = 0;
 
   logger.info('%s (%s), registered as player.', player.name, player.id);
 

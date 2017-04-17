@@ -7,18 +7,12 @@ const config = {
   // one between { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5 }
   LOG_LEVEL: 'debug',
 
-  // time (expressed in ms) to wait after an hand ends,
-  // before a new one can start
-  HANDWAIT: 1000,
+  // time (expressed in ms) to wait after for a players move
+  HANDWAIT:  30 * 1000,
 
-  // define the warm up phase of the tournament.
-  // for the first WARMUP.GAME games of the tournament,
-  // when a game ends, the engine will wait WARMUP.WAIT ms
-  // before a new game starts.
-  WARMUP: {
-    GAME: 5,
-    WAIT: 10 * 1000
-  },
+  // number of hands a player can time out of before they are removed from the game
+  ALLOWED_MISSED_HANDS: 2,
+
 
   // define the max number of different game after which a tournament
   // automatically finishes
@@ -62,10 +56,6 @@ if (process.env.NODE_ENV === 'production'){
 
   if ('SMALL_BLINDS' in process.env){
     config.SMALL_BLINDS = JSON.parse(process.env.SMALL_BLINDS);
-  }
-
-  if ('WARMUP' in process.env){
-    config.WARMUP = JSON.parse(process.env.WARMUP);
   }
 
   if ('AWARDS' in process.env){
