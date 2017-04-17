@@ -251,19 +251,15 @@ const actions = {
 
     
     return new Promise((resolve, reject) => {
-
-
+      logger.log('debug', 'It is player %s (%d) turn.', this.name, this.id);
 
       //Check requestQ for a request with a bet parameter from player with current move
       var interval = setInterval(() => {
-
         //Player should fold if they are out but still in bet loop.
         if (this.status == playerStatus.out) {
-          
           resolve(0);
         }
         if (gs.requests.get(id) && gs.requests.get(id).req.params && gs.requests.get(id).req.params.bet) {
-          console.log("RECIEVED A BET");
           //Reset missed moves counter
           this.missedMoves = 0;
           //Clear timer and interval
@@ -276,16 +272,14 @@ const actions = {
 
       //If no move recieved in 15 seconds send 0
       var timer = setTimeout( () => {
-        logger.log('debug', 'Player %d ran out of time.', id);
+        logger.log('debug', 'Player %s (%d) ran out of time.',this.name, this.id);
         //Clear timer and interval
         clearInterval(interval);
         clearTimeout(timer);
         //Increment missed moves
         this.missedMoves++;
-        console.log(this.missedMoves);
- 
         if (this.missedMoves > config.ALLOWED_MISSED_HANDS) {
-          logger.log('debug', '%d has missed %d hands and has been removed form the game.', id, config.ALLOWED_MISSED_HANDS);
+          logger.log('debug', '%s (%d) has missed %d hands and has been removed form the game.', this.name, this.id, config.ALLOWED_MISSED_HANDS);
           this.status = playerStatus.out;
         }
         resolve(0);
