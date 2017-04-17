@@ -222,6 +222,33 @@ const gamestate = Object.create(EventEmitter.prototype, {
     }
   },
 
+  //Sets player to inactive - this for sure bugged depending on when in bet loop player goes inactive
+  leave: {
+    value: function(req, res) {
+
+      const gs = this[tournaments_].get(req.params.gameId);
+      if (gs === undefined) {
+        
+        //No game found at this id
+        res.send("no game found");
+      } else {
+
+        var player;
+
+        for(var i = 0; i < gs.players.length; i++) {
+          if(gs.players[i].id == req.params.playerId) {
+            gs.players[i].status = playerStatus.out;
+             res.status(200).send('left game');
+            return;
+          }
+        }
+
+        res.status(200).send('left game');
+      }   
+      
+    }
+  }
+
 });
 
 // gamestate[tournaments_] contains the game information

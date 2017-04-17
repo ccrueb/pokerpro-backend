@@ -27,8 +27,14 @@ app.get('/game/:gameId/:playerId', function (req, res) {
     engine.addRequest(req, res);
 });
 
+//This instantly returns the game state. Requested by the frontend guys for easier testing
 app.get('/fastgame/:gameId/:playerId', function (req, res) {
     engine.instantGS(req,res);
+});
+
+//Player leaves game
+app.get('/leave/:gameId/:playerId', function (req, res) {
+    engine.leave(req,res);
 });
 
 /**

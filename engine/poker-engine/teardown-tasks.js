@@ -8,7 +8,7 @@ const logger = require('../storage/logger');
 const showdown = require('./domain-utils/showdown');
 const assignPot = require('./domain-utils/assign-pot');
 const updatePlayersStatus = require('./domain-utils/update-players-status');
-
+var sendResponses = require('./domain-utils/request-queue');
 
 
 exports = module.exports = function* teardown(gs){
@@ -23,7 +23,7 @@ exports = module.exports = function* teardown(gs){
 
 
   showdown(gs);
-  
+  sendResponses(gs);
   logger.log('debug', getRankingLogMessage(gs.handChart), { tag: gs.handUniqueId });
 
   assignPot(gs);
@@ -38,7 +38,7 @@ exports = module.exports = function* teardown(gs){
   }
 
   updatePlayersStatus(gs);
-
+  
 
 
   gs.handChart = gs.winners = null;
