@@ -178,7 +178,6 @@ const gamestate = Object.create(EventEmitter.prototype, {
       } else {
 
       //Pipe information to gamestate
-      logger.info("piping info to gamestate");
       gs.requests.set(req.params.playerId, {req: req, res: res});
 
       }      
