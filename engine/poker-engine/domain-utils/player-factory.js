@@ -349,7 +349,7 @@ const actions = {
     // make sure that the current players can see only his cards
     state.players = gs.players.map(function (player) {
       const cleanPlayer = {
-        id: player.id, name: player.name, status: player.status, chips: player.chips, chipsBet: player.chipsBet
+        id: player.id, name: player.name, status: player.status, chips: player.chips, chipsBet: player.chipsBet, avatarId: player.avatarId | 0
       };
       if (this.id !== player.id) {
         return cleanPlayer;
@@ -470,6 +470,9 @@ exports = module.exports = function factory(obj) {
   ['id', 'name', 'elo']
     .forEach(prop => Object.defineProperty(player, prop, { value: obj[prop] }))
 
+    if(obj.avatarId != undefined) {
+      player.avatarId = obj.avatarId;
+    }
   // status of the player
   player.status = playerStatus.active;
 
